@@ -1,0 +1,454 @@
+#compdef geeny
+
+_geeny(){
+    if (( CURRENT > 2 )); then
+	(( CURRENT-- ))
+	shift words
+	_call_function - "__geeny_${words[1]}" || _nothing
+    else
+	__geeny_commands
+    fi
+}
+
+__geeny_commands() {
+    local context state line curcontent="$curcontext"
+    local -a geeny_options
+    __geeny_setup_geeny_options
+
+    _arguments -C \
+	       $geeny_options \
+	       ': :->command'
+
+    case "$state" in
+	command)
+	    local -a commands
+	    commands=(
+		'swift[quickly make things and projects using defaults]'
+		'apps[manage backend apps]'
+		'addons[manage your addons]'
+		'clients[manage your app clients]'
+		'content-types[manage content types]'
+		'thing-types[manage thing types]'
+		'things[manage things]'
+		'projects[manage projects]'
+		'firmware[mananage firware for thing types]'
+		'login[authenticate yourself to Geeny]'
+		'logout[clear your current login]'
+		'logs[set activity in your Geeny project]'
+		'check[look for CLI updates]'
+		'generate[get template code]'
+	    )
+	    _values 'command' $commands
+	    ;;
+    esac
+}
+
+__geeny_setup_geeny_options() {
+    geeny_options=(
+	{-h,--help}'[Show this help message and exit]'
+	{-V,--version}'[Show Geeny CLI version number and exit]'
+    )
+}
+
+# ========= geeny swift =========
+__geeny_swift() {
+  local context state line curcontext="$curcontext"
+
+  if (( CURRENT > 2 )); then
+    (( CURRENT-- ))
+    shift words
+    _call_function - "__geeny_swift_${words[1]}" || _nothing
+  else
+    __geeny_swift_commands
+  fi
+}
+
+__geeny_swift_commands() {
+    _values 'swift commands' \
+	    'dump[show everything you have in Geeny]' \
+	    'thing[make a new thing]' \
+	    'project[create an entire project]'
+}
+
+__geeny_swift_thing() {
+    _arguments \
+	'(-n --name)'{-n,--name+}'[Optional prefix for your thing, content type and thing type]:Name string:'
+}
+
+__geeny_swift_project() {
+    _arguments \
+	'(-n --name)'{-n,--name+}'[Optional prefix for your app, project and mediation handler]:Name string:'
+}
+
+# ========= geeny apps =========
+__geeny_apps() {
+  local context state line curcontext="$curcontext"
+
+  if (( CURRENT > 2 )); then
+    (( CURRENT-- ))
+    shift words
+    _call_function - "__geeny_apps_${words[1]}" || _nothing
+  else
+    __geeny_apps_commands
+  fi
+}
+
+__geeny_apps_commands() {
+    _values 'apps commands' \
+	    'create[make an app]' \
+	    'list[list apps]' \
+	    'delete[destroy app]' \
+	    'help'
+}
+
+__geeny_apps_create() {
+    _arguments \
+	'(-n --name)'{-n,--name+}'[Name for your application]:Name string:' \
+	'(-s --stage)'{-s,--stage+}'[Where in the development cycle (dev, test, live)]:Stage name:' \
+	'(-r --redirect)'{-r,--redirect+}'[URL to go to after user Geeny connect authentication]:URL:'
+}
+
+# No options to geeny apps list or help, so no completion function
+
+__geeny_apps_delete() {
+    _arguments \
+	'(-id --app-identifier)'{-id,--app-identifier+}'[Your application UUID]:Application UUID:'
+}
+# ========= geeny addons =========
+__geeny_addons() {
+  local context state line curcontext="$curcontext"
+
+  if (( CURRENT > 2 )); then
+    (( CURRENT-- ))
+    shift words
+    _call_function - "__geeny_addons_${words[1]}" || _nothing
+  else
+    __geeny_addons_commands
+  fi
+}
+
+__geeny_addons_commands() {
+    _values 'addons commands' \
+	    'list[list apps]'
+}
+
+# No options to geeny addons list or help, so no completion function
+
+# ========= geeny clients =========
+__geeny_clients() {
+  local context state line curcontext="$curcontext"
+
+  if (( CURRENT > 2 )); then
+    (( CURRENT-- ))
+    shift words
+    _call_function - "__geeny_clients_${words[1]}" || _nothing
+  else
+    __geeny_clients_commands
+  fi
+}
+
+__geeny_clients_commands() {
+    _values 'clients commands' \
+	    'create[make an app]' \
+	    'list[list apps]' \
+	    'delete[destroy app]' \
+	    'help[help text on the clients command]'
+}
+
+__geeny_clients_create() {
+    _arguments \
+	'(-n --name)'{-n,--name+}'[Name of your client]:Name string:' \
+	'(-id --application-identifier)'{-id,--application-identifier+}'[Your app UUID]:UUID:' \
+	'(-r --redirect-uris)'{-r,--redirect-uris+}'[comma separated list of redirect URIs]:URI(,URI...):' \
+	'(-c --secret)'{-c,--secret}'[your client secret]:secret:' \
+	'(-s --scopes)'{-s,--scopes}'[comma separated list of scopes (optional)]:scope(,scope...):'
+}
+
+__geeny_clients_list() {
+    _arguments \
+	'(-id --app-identifier)'{-id,--app-identifier+}'[Your application UUID]:Application UUID:'
+}
+
+__geeny_clients_delete() {
+    _arguments \
+	'(-aid --application-identifier)'{-aid,--application-identifier+}'[Your application UUID]:Application UUID:' \
+	'(-cid --client-identifier)'{-cid,--client-identifier+}'[Your client UUID]:Client UUID:'
+}
+
+# ========= geeny content-types =========
+__geeny_content-types() {
+  local context state line curcontext="$curcontext"
+
+  if (( CURRENT > 2 )); then
+    (( CURRENT-- ))
+    shift words
+    _call_function - "__geeny_content-types_${words[1]}" || _nothing
+  else
+    __geeny_content-types_commands
+  fi
+}
+
+__geeny_content-types_commands() {
+    _values 'content-types subcommands' \
+	    'create[make a content type]' \
+	    'list[list content types]' \
+	    'delete[remove a content type]' \
+	    'help[help text on the content-types commands]'
+}
+
+__geeny_content-types_create() {
+    _arguments \
+	'(-n --name)'{-n,--name+}'[Name for the content type]:Name string:' \
+	'(-d --description)'{-d,--description+}'[Brief description of the content type]:Description string:'
+}
+
+# No options to geeny content-types list, so no completion function
+
+__geeny_content-types_delete() {
+    _arguments '*:content-type ID'
+}
+
+# ========= geeny firmware =========
+__geeny_firmware() {
+  local context state line curcontext="$curcontext"
+
+  if (( CURRENT > 2 )); then
+    (( CURRENT-- ))
+    shift words
+    _call_function - "__geeny_firmware_${words[1]}" || _nothing
+  else
+    __geeny_firmware_commands
+  fi
+}
+
+__geeny_firmware_commands(){
+    _values 'Firmware subcommands'\
+	    'upload[Uploads a new firmware file]'\
+	    'update[Update a firmware file]'\
+	    'delete[Delete a firmware file]'\
+	    'list[List all your firmware files]' \
+	    'help[help text on the firmware command]'
+}
+
+__geeny_firmware_upload(){
+    _arguments \
+	'(-id --thing-type-identifier)'{-id,--thing-type-identifier+}'[UUID of the thing type where this firmaware will be deployed]:ThingType UUID'\
+   	'(-f --file)'{-f,--file+}'[File containing the firmware]:file:_files -g "*.fm"' \
+   	'(-v --version)'{-v,--version+}'[Version of the firmware]:If unspecified this is 1.0.0: ' \
+   	'(-m --minimum)'{-m,--minimum+}'[Minimum required version of the firmware]:If unspecified this is 0.0.0: ' \
+   	'(-d --description)'{-d,--description+}'[Description of the firmware]:string: '
+}
+__geeny_firmware_update(){
+    _arguments \
+	'(-ttid --thing-type-identifier)'{-ttid,--thing-type-identifier+}'[UUID of the thing type where this firmaware will be deployed]:ThingType UUID'\
+   	'(-fid --firmware-identifier)'{-fid,--firmware-identifier+}'[UUID of your firmware]:Firmware UUID' \
+   	'(-s --status)'{-s,--status+}'[Status of the firmware e.g. active or revoked]:string ' \
+   	'(-d --description)'{-d,--description+}'[Description of the firmware]:string: '
+}
+__geeny_firmware_delete(){
+    _arguments \
+	'(-ttid --thing-type-identifier)'{-ttid,--thing-type-identifier+}'[UUID of the thing type where this firmaware is deployed]:ThingType UUID'\
+   	'(-fid --firmware-identifier)'{-fid,--firmware-identifier+}'[UUID of the firmware to delete]:Firmware UUID' \
+}
+__geeny_firmware_list(){
+    _arguments \
+	'(-id --thing-type-identifier)'{-id,--thing-type-identifier+}'[UUID of the thing type to list firmwares for]:ThingType UUID'\
+}
+
+# ========= geeny thing-types =========
+__geeny_thing-types() {
+  local context state line curcontext="$curcontext"
+
+  if (( CURRENT > 2 )); then
+    (( CURRENT-- ))
+    shift words
+    _call_function - "__geeny_thing-types_${words[1]}" || _nothing
+  else
+    __geeny_thing-types_commands
+  fi
+}
+
+__geeny_thing-types_commands() {
+    _values 'thing-types subcommands' \
+	    'create[register a new type of thing]' \
+	    'list[show all types of things registered to your Geeny account]' \
+	    'delete[delete a type and the firmware associated with that type]' \
+	    'help[help text on the thing-types command]'
+}
+
+__geeny_thing-types_create() {
+    _arguments \
+	'(-n --name)'{-n,--name+}'[Name for thing type]:Name string: ' \
+	'(-ids --content-type-identifiers)'{-ids,--content-type-identifiers+}'[Comma separated list of content type UUIDs]:Content type UUID list:'
+}
+
+# No options to geeny thing-types list, so no completion function
+
+__geeny_thing-types_delete() {
+    _arguments '*:thing type UUID'
+}
+
+# ========= geeny things =========
+__geeny_things() {
+  local context state line curcontext="$curcontext"
+
+  if (( CURRENT > 2 )); then
+    (( CURRENT-- ))
+    shift words
+    _call_function - "__geeny_things_${words[1]}" || _nothing
+  else
+    __geeny_things_commands
+  fi
+}
+
+__geeny_things_commands() {
+    _values 'things subcommands' \
+	    'create[register a new thing of a given type]' \
+	    'list[show all things registered to your Geeny account]' \
+	    'pair[connect a thing to your account]' \
+	    'delete[delete a thing given its ID]' \
+	    'detail[get everything about a thing]' \
+	    'test[send a payload from a thing to a topic, optionally repeatedly]' \
+	    'help[help text on the things command]'
+}
+
+__geeny_things_create() {
+    _arguments \
+	'(-a --attributes)'{-a,--attributes+}'[Comma separated list of key,value pairs of custom attributes]:key,value,key,value: ' \
+	'(-id --thing-type-identifier)'{-id,--thing-type-identifier+}'[Thing type UUID]:Thing type UUID:'
+}
+
+# No options to geeny things list, so no completion function
+
+__geeny_things_pair() {
+    _arguments \
+	'(-p --pairing-code)'{-p,--pairing-code+}'[pairing code]:AA-BB-CC-DD:'
+}
+
+__geeny_things_delete() {
+    _arguments '*:thing UUID'
+}
+
+__geeny_things_detail() {
+    _arguments '*:thing UUID'
+}
+
+__geeny_things_test() {
+    _arguments \
+        '(-tid --thing-id)'{-tid,--thing-id+}'[ID of thing to send data from]:thing UUID ' \
+        '(-cid --content-type-identifier)'{-cid,--content-type-identifier+}'[your content type UUID]:content type UUID ' \
+        '(-i --interval)'{-i,--interval+}'[Send payload every x milliseconds]:milliseconds: ' \
+	'(-n --number)'{-n,--number+}'[Number of payload repetitions. Unlimited if ommitted]:number of repetitions: ' \
+	'(-f --file)'{-f,--file+}'[Location of file containing message payload]:file path: ' \
+	'(-t --topic)'{-t,--topic+}'[Topic on MQTT gateway to send message to]:topic string: ' \
+	'(-s --subscribe)'{-s,--subscribe}'[Subscribe to the topic given by --topic]:: ' \
+	'(-e --endpoint)'{-e,--endpoint+}'[URL of MQTT gateway, or default]:URL '
+}
+
+# ========= geeny projects =========
+__geeny_projects() {
+  local context state line curcontext="$curcontext"
+
+  if (( CURRENT > 2 )); then
+    (( CURRENT-- ))
+    shift words
+    _call_function - "__geeny_projects_${words[1]}" || _nothing
+  else
+    __geeny_projects_commands
+  fi
+}
+
+__geeny_projects_commands() {
+    _values 'projects subcommands' \
+	    'create[create a new Geeny project]' \
+	    'list[list Geeny projects and their IDs]' \
+	    'deploy[deploy the project you are in to Geeny]' \
+	    'delete[destroy a project and its repo]' \
+	    'help[help text on the projects command]'
+}
+
+__geeny_projects_delete() {
+    _arguments \
+	'(-id --identifier)'{-id,--identifier+}'[The UUID of the project to delete]:project UUID'
+}
+
+# No options to geeny projects list or deploy, so no completion functions
+
+__geeny_projects_create() {
+    _arguments \
+        '(-n --name)'{-n,--name+}'[Name of your project]:string: ' \
+        '(-id --application-id)'{-id,--application-id+}'[An application UUID for your project]:application UUID'
+}
+
+# ========= geeny logs =========
+__geeny_logs() {
+  local context state line curcontext="$curcontext"
+
+  if (( CURRENT > 2 )); then
+    (( CURRENT-- ))
+    shift words
+    _call_function - "__geeny_logs_${words[1]}" || _nothing
+  else
+    __geeny_logs_commands
+  fi
+}
+
+__geeny_logs_commands() {
+    # TO DO: find a way to complete on -tids, -sids, -n plus handle subcommands
+    _values 'options -tids -sids -n and subcommands:' \
+            'stream[tail the logs]' \
+            'help[help text for the logs command]'
+}
+
+__geeny_logs_stream() {
+    _arguments \
+	'(-tids --thing-identifiers)'{-tids,--thing-identifiers+}'[List of thing UUIDs]:UUID,UUID,...: ' \
+	'(-sids --service-identifiers)'{-sids,--service-identifiers+}'[Service names]:io-mediation,iot-gateway,...: '
+}
+
+# ========= geeny check =========
+__geeny_check() {
+  if (( CURRENT > 2 )); then
+      _nothing
+  else
+    _values 'check subcommands' \
+            'update[check for new CLI versions]' \
+	    'help[Help text on the check command]'
+  fi
+}
+
+# ========= geeny generate =========
+__geeny_generate() {
+  local context state line curcontext="$curcontext"
+
+  if (( CURRENT > 2 )); then
+    (( CURRENT-- ))
+    shift words
+    _call_function - "__geeny_generate_${words[1]}" || _nothing
+  else
+    __geeny_generate_commands
+  fi
+}
+
+__geeny_generate_commands() {
+    _values 'generate subcommands' \
+            'project[get starter code for a Geeny project]' \
+            'handler[get starter code for a new mediation handler]' \
+	    'actor[get starter code for a new pipeline actor]' \
+	    'help[help text on the generate command]'
+}
+
+__geeny_generate_project() {
+    _arguments \
+	'(-id --identifier)'{-id,--identifier+}'[UUID of the project to generate code for]:project UUID'
+}
+
+__geeny_generate_handler() {
+    _arguments \
+	'(-n --name)'{-n,--name+}'[name for the mediation handler]:string'
+}
+
+__geeny_generate_actor() {
+    _arguments \
+	'(-n --name)'{-n,--name+}'[name for the pipeline actor]:string'
+}

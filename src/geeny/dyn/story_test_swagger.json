@@ -1,0 +1,5471 @@
+{
+  "swagger": "2.0",
+  "host": "api.geeny.io",
+  "basePath": "/",
+  "schemes": [
+    "https"
+  ],
+  "info": {
+    "title": "Geeny Platform API",
+    "version": "v1",
+    "description": "For more information see the <a href=\"/\">index page</a>."
+  },
+  "tags": [],
+  "paths": {
+    "/health": {
+      "get": {
+        "operationId": "getHealth",
+        "tags": [
+          "health"
+        ],
+        "responses": {
+          "default": {
+            "schema": {
+              "type": "string"
+            },
+            "description": "Successful"
+          }
+        },
+        "x-meta": {
+          "hidden": true
+        }
+      }
+    },
+    "/addons": {
+      "get": {
+        "summary": "Get all addons",
+        "operationId": "addons_list",
+        "tags": [
+          "addons"
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Model 1",
+              "type": "array"
+            },
+            "description": "Successful",
+            "x-meta": {
+              "resultDisplay": {
+                "type": "table",
+                "format": null,
+                "formatArgs": null,
+                "fields": [
+                  {
+                    "id": "id",
+                    "name": "ID"
+                  },
+                  {
+                    "id": "name",
+                    "name": "Name"
+                  },
+                  {
+                    "id": "accountId",
+                    "name": "Account ID"
+                  },
+                  {
+                    "id": "endpoint",
+                    "name": "Endpoint"
+                  },
+                  {
+                    "id": "webhook",
+                    "name": "Webhook"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Create an addon",
+        "operationId": "addons_create",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/Model 16"
+            }
+          }
+        ],
+        "tags": [
+          "addons"
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/AddonsSchema",
+              "type": "object"
+            },
+            "description": "Successful",
+            "x-meta": {
+              "resultDisplay": {
+                "type": "message",
+                "format": "Created addon with id: %s, name: %s",
+                "formatArgs": [
+                  "id",
+                  "name"
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/applications": {
+      "get": {
+        "summary": "Get all applications",
+        "operationId": "apps_list",
+        "tags": [
+          "applications"
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Model 2",
+              "type": "array"
+            },
+            "description": "Successful",
+            "x-meta": {
+              "resultDisplay": {
+                "type": "table",
+                "format": null,
+                "formatArgs": null,
+                "fields": [
+                  {
+                    "id": "id",
+                    "name": "ID"
+                  },
+                  {
+                    "id": "identityId",
+                    "name": "Identity ID"
+                  },
+                  {
+                    "id": "name",
+                    "name": "Name"
+                  },
+                  {
+                    "id": "stage",
+                    "name": "Stage"
+                  },
+                  {
+                    "id": "logoUrl",
+                    "name": "Logo URL"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Create an application",
+        "operationId": "apps_create",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/CreateApplication"
+            }
+          }
+        ],
+        "tags": [
+          "applications"
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Application",
+              "type": "object"
+            },
+            "description": "Successful",
+            "x-meta": {
+              "resultDisplay": {
+                "type": "message",
+                "format": "Created app with id: %s, name: %s",
+                "formatArgs": [
+                  "id",
+                  "name"
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/contentTypes": {
+      "get": {
+        "summary": "Get all content types for the user",
+        "operationId": "content-types_list",
+        "tags": [
+          "contentTypes"
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Model 3",
+              "type": "array"
+            },
+            "description": "Successful",
+            "x-meta": {
+              "resultDisplay": {
+                "type": "table",
+                "format": null,
+                "formatArgs": null,
+                "fields": [
+                  {
+                    "id": "name",
+                    "name": "Name"
+                  },
+                  {
+                    "id": "id",
+                    "name": "ID"
+                  },
+                  {
+                    "id": "identityId",
+                    "name": "Identity ID"
+                  },
+                  {
+                    "id": "description",
+                    "name": "Description"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Create a content type",
+        "operationId": "content-types_create",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/CreateOrEditContentType"
+            }
+          }
+        ],
+        "tags": [
+          "contentTypes"
+        ],
+        "responses": {
+          "201": {
+            "schema": {
+              "$ref": "#/definitions/Pipeline",
+              "type": "object"
+            },
+            "description": "Created",
+            "x-meta": {
+              "resultDisplay": {
+                "type": "message",
+                "format": "Created content-type with id: %s, name: %s",
+                "formatArgs": [
+                  "id",
+                  "name"
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/projects": {
+      "get": {
+        "summary": "Get all projects for the user",
+        "operationId": "projects_list",
+        "description": "You can put swagger notes here",
+        "tags": [
+          "projects"
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Model 4",
+              "type": "array"
+            },
+            "description": "Successful",
+            "x-meta": {
+              "resultDisplay": {
+                "type": "table",
+                "format": null,
+                "formatArgs": null,
+                "fields": [
+                  {
+                    "id": "id",
+                    "name": "ID"
+                  },
+                  {
+                    "id": "name",
+                    "name": "Name"
+                  },
+                  {
+                    "id": "repositoryName",
+                    "name": "Repo Name"
+                  },
+                  {
+                    "id": "identityId",
+                    "name": "Identity ID"
+                  },
+                  {
+                    "id": "applicationId",
+                    "name": "Application ID"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Create a project",
+        "operationId": "projects_create",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/CreateOrEditProject"
+            }
+          }
+        ],
+        "tags": [
+          "projects"
+        ],
+        "responses": {
+          "201": {
+            "schema": {
+              "$ref": "#/definitions/Project",
+              "type": "object"
+            },
+            "description": "Created",
+            "x-meta": {
+              "resultDisplay": {
+                "type": "message",
+                "format": "Created project with id: %s, name: %s",
+                "formatArgs": [
+                  "id",
+                  "name"
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions": {
+      "get": {
+        "summary": "Lists all current subscriptions",
+        "operationId": "subscriptions_list",
+        "tags": [
+          "subscriptions"
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Model 5",
+              "type": "array"
+            },
+            "description": "Successful",
+            "x-meta": {
+              "resultDisplay": {
+                "type": "table",
+                "format": null,
+                "formatArgs": null,
+                "fields": [
+                  {
+                    "id": "id",
+                    "name": "ID"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Creates a new subscription",
+        "operationId": "subscriptions_create",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/CreateOrEditSubscription"
+            }
+          }
+        ],
+        "tags": [
+          "subscriptions"
+        ],
+        "responses": {
+          "202": {
+            "schema": {
+              "$ref": "#/definitions/Subscription",
+              "type": "object"
+            },
+            "description": "Accepted",
+            "x-meta": {
+              "resultDisplay": {
+                "type": "message",
+                "format": "Created subscription with id: %s",
+                "formatArgs": [
+                  "id"
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/thingTypes": {
+      "get": {
+        "summary": "Get all thing type for the user",
+        "operationId": "thing-types_list",
+        "tags": [
+          "thingTypes"
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Model 7",
+              "type": "array"
+            },
+            "description": "Successful",
+            "x-meta": {
+              "resultDisplay": {
+                "type": "table",
+                "format": null,
+                "formatArgs": null,
+                "fields": [
+                  {
+                    "id": "id",
+                    "name": "ID"
+                  },
+                  {
+                    "id": "name",
+                    "name": "Name"
+                  },
+                  {
+                    "id": "identityId",
+                    "name": "Identity ID"
+                  },
+                  {
+                    "id": "contentTypes",
+                    "name": "Content Types"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Create a thing type",
+        "operationId": "thing-types_create",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/CreateOrEditThingType"
+            }
+          }
+        ],
+        "tags": [
+          "thingTypes"
+        ],
+        "responses": {
+          "201": {
+            "schema": {
+              "$ref": "#/definitions/Model 6",
+              "type": "object"
+            },
+            "description": "Created",
+            "x-meta": {
+              "resultDisplay": {
+                "type": "message",
+                "format": "Created thing-type with id: %s, name: %s",
+                "formatArgs": [
+                  "id",
+                  "name"
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/things": {
+      "get": {
+        "summary": "Get all things for the user",
+        "operationId": "things_list",
+        "tags": [
+          "things"
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Model 8",
+              "type": "array"
+            },
+            "description": "Successful",
+            "x-meta": {
+              "resultDisplay": {
+                "type": "table",
+                "format": null,
+                "formatArgs": null,
+                "fields": [
+                  {
+                    "id": "id",
+                    "name": "ID"
+                  },
+                  {
+                    "id": "thingTypeId",
+                    "name": "Thing Type ID"
+                  },
+                  {
+                    "id": "pairingCode",
+                    "name": "Pairing Code"
+                  },
+                  {
+                    "id": "attributes",
+                    "name": "Attributes"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Create a new thing",
+        "operationId": "things_createbase",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/Model 18"
+            }
+          }
+        ],
+        "tags": [
+          "things"
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/ThingsSchema",
+              "type": "object"
+            },
+            "description": "Successful",
+            "x-meta": {
+              "resultDisplay": {
+                "type": "message",
+                "format": "Create thing with id: %s, pairing code: %s",
+                "formatArgs": [
+                  "id",
+                  "pairingCode"
+                ]
+              }
+            }
+          }
+        },
+        "x-meta": {
+          "hidden": true
+        }
+      }
+    },
+    "/addons/{addonId}": {
+      "get": {
+        "summary": "Get an addon by ID",
+        "operationId": "addons_get",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "the addon UUID",
+            "x-meta": {
+              "flag": "id",
+              "aliases": [
+                "addon-identifier"
+              ]
+            },
+            "x-format": {
+              "guid": true
+            },
+            "name": "addonId",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "tags": [
+          "addons"
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/AddonsSchema",
+              "type": "object"
+            },
+            "description": "Successful",
+            "x-meta": {
+              "resultDisplay": {
+                "type": "list",
+                "format": null,
+                "formatArgs": null,
+                "fields": [
+                  {
+                    "id": "id",
+                    "name": "ID"
+                  },
+                  {
+                    "id": "name",
+                    "name": "Name"
+                  },
+                  {
+                    "id": "accountId",
+                    "name": "Account ID"
+                  },
+                  {
+                    "id": "endpoint",
+                    "name": "Endpoint"
+                  },
+                  {
+                    "id": "webhook",
+                    "name": "Webhook"
+                  },
+                  {
+                    "id": "createdAt",
+                    "name": "Created At"
+                  },
+                  {
+                    "id": "modifiedAt",
+                    "name": "Modified At"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "summary": "Update an existing addon",
+        "operationId": "addons_update",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "the addon UUID",
+            "x-meta": {
+              "flag": "id",
+              "aliases": [
+                "addon-identifier"
+              ]
+            },
+            "x-format": {
+              "guid": true
+            },
+            "name": "addonId",
+            "in": "path",
+            "required": true
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/Model 26"
+            }
+          }
+        ],
+        "tags": [
+          "addons"
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/AddonsSchema",
+              "type": "object"
+            },
+            "description": "Successful",
+            "x-meta": {
+              "resultDisplay": {
+                "type": "message",
+                "format": "Updated addon with id: %s, name: %s",
+                "formatArgs": [
+                  "id",
+                  "name"
+                ]
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Deletes an addon",
+        "operationId": "addons_delete",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "the addon UUID",
+            "x-meta": {
+              "flag": "id",
+              "aliases": [
+                "addon-identifier"
+              ]
+            },
+            "x-format": {
+              "guid": true
+            },
+            "name": "addonId",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "tags": [
+          "addons"
+        ],
+        "responses": {
+          "204": {
+            "x-meta": {
+              "resultDisplay": {
+                "type": "message",
+                "format": "Deleted addon"
+              }
+            },
+            "description": "No Content"
+          }
+        }
+      }
+    },
+    "/applications/{applicationId}": {
+      "get": {
+        "summary": "Get an application by ID",
+        "operationId": "apps_get",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "The application UUID",
+            "x-meta": {
+              "flag": "id",
+              "aliases": [
+                "app-identifier"
+              ]
+            },
+            "x-format": {
+              "guid": true
+            },
+            "name": "applicationId",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "tags": [
+          "applications"
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Application",
+              "type": "object"
+            },
+            "description": "Successful",
+            "x-meta": {
+              "resultDisplay": {
+                "type": "table",
+                "format": null,
+                "formatArgs": null,
+                "fields": [
+                  {
+                    "id": "id",
+                    "name": "ID"
+                  },
+                  {
+                    "id": "identityId",
+                    "name": "Identity ID"
+                  },
+                  {
+                    "id": "name",
+                    "name": "Name"
+                  },
+                  {
+                    "id": "stage",
+                    "name": "Stage"
+                  },
+                  {
+                    "id": "logoUrl",
+                    "name": "Logo URL"
+                  },
+                  {
+                    "id": "createdAt",
+                    "name": "Created At"
+                  },
+                  {
+                    "id": "modifiedAt",
+                    "name": "Modified At"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "summary": "Update an application",
+        "operationId": "apps_update",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "The application UUID",
+            "x-meta": {
+              "flag": "id",
+              "aliases": [
+                "app-identifier"
+              ]
+            },
+            "x-format": {
+              "guid": true
+            },
+            "name": "applicationId",
+            "in": "path",
+            "required": true
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/Model 27"
+            }
+          }
+        ],
+        "tags": [
+          "applications"
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Application",
+              "type": "object"
+            },
+            "description": "Successful",
+            "x-meta": {
+              "resultDisplay": {
+                "type": "message",
+                "format": "Updated app with id: %s, name: %s",
+                "formatArgs": [
+                  "id",
+                  "name"
+                ]
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete an application",
+        "operationId": "apps_delete",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "The application UUID",
+            "x-meta": {
+              "flag": "id",
+              "aliases": [
+                "app-identifier"
+              ]
+            },
+            "x-format": {
+              "guid": true
+            },
+            "name": "applicationId",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "tags": [
+          "applications"
+        ],
+        "responses": {
+          "200": {
+            "x-meta": {
+              "resultDisplay": {
+                "type": "message",
+                "format": "Deleted app"
+              }
+            },
+            "description": "Successful",
+            "schema": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "/contentTypes/{id}": {
+      "get": {
+        "summary": "Get a content type",
+        "operationId": "content-types_get",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "The thing type UUID",
+            "x-meta": {
+              "flag": "id",
+              "aliases": [
+                "thing-type-identifier"
+              ]
+            },
+            "x-format": {
+              "guid": true
+            },
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "tags": [
+          "contentTypes"
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Pipeline",
+              "type": "object"
+            },
+            "description": "Successful",
+            "x-meta": {
+              "resultDisplay": {
+                "type": "list",
+                "format": null,
+                "formatArgs": null,
+                "fields": [
+                  {
+                    "id": "name",
+                    "name": "Name"
+                  },
+                  {
+                    "id": "id",
+                    "name": "ID"
+                  },
+                  {
+                    "id": "identityId",
+                    "name": "Identity ID"
+                  },
+                  {
+                    "id": "description",
+                    "name": "Description"
+                  },
+                  {
+                    "id": "createdAt",
+                    "name": "Created At"
+                  },
+                  {
+                    "id": "modifiedAt",
+                    "name": "Modified At"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "summary": "Update a content type",
+        "operationId": "content-types_update",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "The thing type UUID",
+            "x-meta": {
+              "flag": "id",
+              "aliases": [
+                "thing-type-identifier"
+              ]
+            },
+            "x-format": {
+              "guid": true
+            },
+            "name": "id",
+            "in": "path",
+            "required": true
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/CreateOrEditContentType"
+            }
+          }
+        ],
+        "tags": [
+          "contentTypes"
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Pipeline",
+              "type": "object"
+            },
+            "description": "Successful",
+            "x-meta": {
+              "resultDisplay": {
+                "type": "message",
+                "format": "Updated content-type with id: %s, name: %s",
+                "formatArgs": [
+                  "id",
+                  "name"
+                ]
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete a content type",
+        "operationId": "content-types_delete",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "The thing type UUID",
+            "x-meta": {
+              "flag": "id",
+              "aliases": [
+                "thing-type-identifier"
+              ]
+            },
+            "x-format": {
+              "guid": true
+            },
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "tags": [
+          "contentTypes"
+        ],
+        "responses": {
+          "204": {
+            "x-meta": {
+              "resultDisplay": {
+                "type": "message",
+                "format": "Deleted content-type"
+              }
+            },
+            "description": "No Content"
+          }
+        }
+      }
+    },
+    "/projects/{id}": {
+      "get": {
+        "summary": "Get the project and the project`s repository information",
+        "operationId": "projects_get",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "The project UUID",
+            "x-meta": {
+              "flag": "id",
+              "aliases": [
+                "project-identifier"
+              ]
+            },
+            "x-format": {
+              "guid": true
+            },
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "tags": [
+          "projects"
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Project",
+              "type": "object"
+            },
+            "description": "Successful",
+            "x-meta": {
+              "resultDisplay": {
+                "type": "table",
+                "format": null,
+                "formatArgs": null,
+                "fields": [
+                  {
+                    "id": "id",
+                    "name": "ID"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "summary": "Update a project",
+        "operationId": "projects_update",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "The project UUID",
+            "x-meta": {
+              "flag": "id",
+              "aliases": [
+                "project-identifier"
+              ]
+            },
+            "x-format": {
+              "guid": true
+            },
+            "name": "id",
+            "in": "path",
+            "required": true
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/Model 28"
+            }
+          }
+        ],
+        "tags": [
+          "projects"
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Project",
+              "type": "object"
+            },
+            "description": "Successful",
+            "x-meta": {
+              "resultDisplay": {
+                "type": "message",
+                "format": "Updated project with id: %s, name: %s",
+                "formatArgs": [
+                  "id",
+                  "name"
+                ]
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete a project",
+        "operationId": "projects_delete",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "The project UUID",
+            "x-meta": {
+              "flag": "id",
+              "aliases": [
+                "project-identifier"
+              ]
+            },
+            "x-format": {
+              "guid": true
+            },
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "tags": [
+          "projects"
+        ],
+        "responses": {
+          "204": {
+            "x-meta": {
+              "resultDisplay": {
+                "type": "message",
+                "format": "Deleted project"
+              }
+            },
+            "description": "No Content"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}": {
+      "get": {
+        "summary": "Returns details for specified subscription",
+        "operationId": "subscriptions_get",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "The subscription UUID",
+            "x-meta": {
+              "flag": "sid",
+              "aliases": [
+                "subscription-identifier"
+              ]
+            },
+            "x-format": {
+              "guid": true
+            },
+            "name": "subscriptionId",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "tags": [
+          "subscriptions"
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Subscription",
+              "type": "object"
+            },
+            "description": "Successful",
+            "x-meta": {
+              "resultDisplay": {
+                "type": "list",
+                "format": null,
+                "formatArgs": null,
+                "fields": [
+                  {
+                    "id": "id",
+                    "name": "ID"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Deletes specified subscription",
+        "operationId": "subscriptions_delete",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "The subscription UUID",
+            "x-meta": {
+              "flag": "sid",
+              "aliases": [
+                "subscription-identifier"
+              ]
+            },
+            "x-format": {
+              "guid": true
+            },
+            "name": "subscriptionId",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "tags": [
+          "subscriptions"
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/SubscriptionCreated",
+              "type": "object"
+            },
+            "description": "Successful",
+            "x-meta": {
+              "resultDisplay": {
+                "type": "message",
+                "format": "Deleted subscription"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/thingTypes/{id}": {
+      "get": {
+        "summary": "Get a thing type",
+        "operationId": "thing-types_get",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "The thing type UUID",
+            "x-meta": {
+              "flag": "id",
+              "aliases": [
+                "thing-type-identifier"
+              ]
+            },
+            "x-format": {
+              "guid": true
+            },
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "tags": [
+          "thingTypes"
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Model 6",
+              "type": "object"
+            },
+            "description": "Successful",
+            "x-meta": {
+              "resultDisplay": {
+                "type": "list",
+                "format": null,
+                "formatArgs": null,
+                "fields": [
+                  {
+                    "id": "id",
+                    "name": "ID"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "summary": "Update a thing type",
+        "operationId": "thing-types_update",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "The thing type UUID",
+            "x-meta": {
+              "flag": "id",
+              "aliases": [
+                "thing-type-identifier"
+              ]
+            },
+            "x-format": {
+              "guid": true
+            },
+            "name": "id",
+            "in": "path",
+            "required": true
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/Model 29"
+            }
+          }
+        ],
+        "tags": [
+          "thingTypes"
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Model 6",
+              "type": "object"
+            },
+            "description": "Successful",
+            "x-meta": {
+              "resultDisplay": {
+                "type": "message",
+                "format": "Updated thing-type with id: %s, name: %s",
+                "formatArgs": [
+                  "id",
+                  "name"
+                ]
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete a thing type",
+        "operationId": "thing-types_delete",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "The thing type UUID",
+            "x-meta": {
+              "flag": "id",
+              "aliases": [
+                "thing-type-identifier"
+              ]
+            },
+            "x-format": {
+              "guid": true
+            },
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "tags": [
+          "thingTypes"
+        ],
+        "responses": {
+          "204": {
+            "x-meta": {
+              "resultDisplay": {
+                "type": "message",
+                "format": "Deleted thing-type"
+              }
+            },
+            "description": "No Content"
+          }
+        }
+      }
+    },
+    "/things/{thingId}": {
+      "get": {
+        "summary": "Get a thing",
+        "operationId": "things_get",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "the thing UUID",
+            "x-meta": {
+              "flag": "id",
+              "aliases": [
+                "thing-identifier"
+              ]
+            },
+            "x-format": {
+              "guid": true
+            },
+            "name": "thingId",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "tags": [
+          "things"
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/ThingsSchema",
+              "type": "object"
+            },
+            "description": "Successful",
+            "x-meta": {
+              "resultDisplay": {
+                "type": "list",
+                "format": null,
+                "formatArgs": null,
+                "fields": [
+                  {
+                    "id": "id",
+                    "name": "ID"
+                  },
+                  {
+                    "id": "thingTypeId",
+                    "name": "Thing Type ID"
+                  },
+                  {
+                    "id": "pairingCode",
+                    "name": "Pairing Code"
+                  },
+                  {
+                    "id": "attributes",
+                    "name": "Attributes"
+                  },
+                  {
+                    "id": "createdAt",
+                    "name": "Created At"
+                  },
+                  {
+                    "id": "modifiedAt",
+                    "name": "Modified At"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete a thing",
+        "operationId": "things_delete",
+        "description": "WARNING: Thing deletion cannot be reversed. The thing's secret and certificate will be removed from the registry, after which the associated physical thing will no longer be usable.",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "the thing UUID",
+            "x-meta": {
+              "flag": "id",
+              "aliases": [
+                "thing-identifier"
+              ]
+            },
+            "x-format": {
+              "guid": true
+            },
+            "name": "thingId",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "tags": [
+          "things"
+        ],
+        "responses": {
+          "204": {
+            "x-meta": {
+              "resultDisplay": {
+                "type": "message",
+                "format": "Deleted thing"
+              }
+            },
+            "description": "No Content"
+          },
+          "405": {
+            "x-meta": {
+              "resultDisplay": {
+                "type": "message",
+                "format": "Not allowed to delete thing"
+              }
+            },
+            "description": "Method Not Allowed"
+          }
+        }
+      }
+    },
+    "/applications/{applicationId}/logo": {
+      "get": {
+        "summary": "Get application logo image",
+        "operationId": "apps_logo",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "The application id",
+            "x-format": {
+              "guid": true
+            },
+            "name": "applicationId",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "produces": [
+          "image/*"
+        ],
+        "tags": [
+          "applications"
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad request",
+            "x-meta": {
+              "resultDisplay": {
+                "type": "message",
+                "format": "Bad request"
+              }
+            }
+          },
+          "404": {
+            "description": "Application not found",
+            "x-meta": {
+              "resultDisplay": {
+                "type": "message",
+                "format": "Application not found"
+              }
+            }
+          },
+          "412": {
+            "description": "Application logo not found (application does not have a logo)",
+            "x-meta": {
+              "resultDisplay": {
+                "type": "message",
+                "format": "Application logo not found (application does not have a logo)"
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Upload application logo image",
+        "operationId": "apps_logo_create",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "The application UUID",
+            "x-meta": {
+              "flag": "id",
+              "aliases": [
+                "app-identifier"
+              ]
+            },
+            "x-format": {
+              "guid": true
+            },
+            "name": "applicationId",
+            "in": "path",
+            "required": true
+          },
+          {
+            "type": "file",
+            "description": "An image file (png, gif, jpg), max. size 256kB, aspect ratio 1 (quadratic)",
+            "x-meta": {
+              "flag": "f",
+              "aliases": [
+                "file"
+              ],
+              "swaggerType": "file"
+            },
+            "in": "formData",
+            "name": "file",
+            "required": true
+          }
+        ],
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "tags": [
+          "applications"
+        ],
+        "responses": {
+          "200": {
+            "x-meta": {
+              "resultDisplay": {
+                "type": "message",
+                "format": "Created logo"
+              }
+            },
+            "description": "Successful",
+            "schema": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "/applications/{applicationId}/pipelines": {
+      "get": {
+        "summary": "Return the list of pipelines for the application",
+        "operationId": "pipelines_list",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "The application UUID",
+            "x-meta": {
+              "flag": "id",
+              "aliases": [
+                "app-identifier"
+              ]
+            },
+            "x-format": {
+              "guid": true
+            },
+            "name": "applicationId",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "tags": [
+          "applications"
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Model 10",
+              "type": "array"
+            },
+            "description": "Successful",
+            "x-meta": {
+              "resultDisplay": {
+                "type": "table",
+                "format": null,
+                "formatArgs": null,
+                "fields": [
+                  {
+                    "id": "id",
+                    "name": "ID"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Create an application pipeline",
+        "operationId": "pipelines_create",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "The application UUID",
+            "x-meta": {
+              "flag": "id",
+              "aliases": [
+                "app-identifier"
+              ]
+            },
+            "x-format": {
+              "guid": true
+            },
+            "name": "applicationId",
+            "in": "path",
+            "required": true
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/CreatePipeline"
+            }
+          }
+        ],
+        "tags": [
+          "applications"
+        ],
+        "responses": {
+          "201": {
+            "schema": {
+              "$ref": "#/definitions/Model 9",
+              "type": "object"
+            },
+            "description": "Created",
+            "x-meta": {
+              "resultDisplay": {
+                "type": "message",
+                "format": "Created pipeline with id: %s, name: %s",
+                "formatArgs": [
+                  "id",
+                  "name"
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/contentTypes/{contentTypeId}/mediation": {
+      "get": {
+        "summary": "Return the list of mediations for the content type",
+        "operationId": "mediations_list",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "The content type UUID",
+            "x-meta": {
+              "flag": "cid",
+              "aliases": [
+                "content-type-identifier"
+              ]
+            },
+            "x-format": {
+              "guid": true
+            },
+            "name": "contentTypeId",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "tags": [
+          "contentTypes"
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/createMediation",
+              "type": "object"
+            },
+            "description": "Successful",
+            "x-meta": {
+              "resultDisplay": {
+                "type": "table",
+                "format": null,
+                "formatArgs": null,
+                "fields": [
+                  {
+                    "id": "id",
+                    "name": "ID"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Create mediation",
+        "operationId": "mediations_create",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "The content type UUID",
+            "x-meta": {
+              "flag": "id",
+              "aliases": [
+                "content-type-identifier"
+              ]
+            },
+            "x-format": {
+              "guid": true
+            },
+            "name": "contentTypeId",
+            "in": "path",
+            "required": true
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/Model 23"
+            }
+          }
+        ],
+        "tags": [
+          "contentTypes"
+        ],
+        "responses": {
+          "201": {
+            "schema": {
+              "$ref": "#/definitions/Mediation",
+              "type": "object"
+            },
+            "description": "Created",
+            "x-meta": {
+              "resultDisplay": {
+                "type": "message",
+                "format": "Created mediation with id: %s",
+                "formatArgs": [
+                  "id"
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/projects/{id}/status": {
+      "get": {
+        "summary": "Get the project status information",
+        "operationId": "projects_status",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "The project UUID",
+            "x-meta": {
+              "flag": "id",
+              "aliases": [
+                "project-identifier"
+              ]
+            },
+            "x-format": {
+              "guid": true
+            },
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "tags": [
+          "projects"
+        ],
+        "responses": {
+          "default": {
+            "schema": {
+              "type": "string"
+            },
+            "description": "Successful"
+          }
+        },
+        "x-meta": {
+          "hidden": true
+        }
+      }
+    },
+    "/thingTypes/{thingTypeId}/firmwares": {
+      "get": {
+        "summary": "Retrieves a firmware",
+        "operationId": "firmwares_list",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "The thing type UUID",
+            "x-meta": {
+              "flag": "id",
+              "aliases": [
+                "thing-type-identifier"
+              ]
+            },
+            "x-format": {
+              "guid": true
+            },
+            "name": "thingTypeId",
+            "in": "path",
+            "required": true
+          },
+          {
+            "type": "string",
+            "description": "Current version of thing's firmware",
+            "x-meta": {
+              "flag": "v",
+              "aliases": [
+                "version"
+              ]
+            },
+            "pattern": "/^(\\d+\\.)?(\\d+\\.)?(\\*|\\d+)$/",
+            "name": "currentVersion",
+            "in": "query"
+          }
+        ],
+        "tags": [
+          "thingTypes"
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Model 11",
+              "type": "array"
+            },
+            "description": "Successful",
+            "x-meta": {
+              "resultDisplay": {
+                "type": "table",
+                "format": null,
+                "formatArgs": null,
+                "fields": [
+                  {
+                    "id": "id",
+                    "name": "ID"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Create a firmware",
+        "operationId": "firmwares_create",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "The thing type UUID",
+            "x-meta": {
+              "flag": "id",
+              "aliases": [
+                "thing-type-identifier"
+              ]
+            },
+            "x-format": {
+              "guid": true
+            },
+            "name": "thingTypeId",
+            "in": "path",
+            "required": true
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/Model 24"
+            }
+          }
+        ],
+        "tags": [
+          "thingTypes"
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Firmware",
+              "type": "object"
+            },
+            "description": "Successful",
+            "x-meta": {
+              "resultDisplay": {
+                "type": "message",
+                "format": "Created firmware with id: %s",
+                "formatArgs": [
+                  "id"
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/things/{thingId}/connectivity": {
+      "get": {
+        "summary": "Provides connectivity status informations",
+        "operationId": "things_connectivity",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "the thing UUID",
+            "x-meta": {
+              "flag": "id",
+              "aliases": [
+                "thing-identifier"
+              ]
+            },
+            "x-format": {
+              "guid": true
+            },
+            "name": "thingId",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "tags": [
+          "things"
+        ],
+        "responses": {
+          "200": {
+            "x-meta": {
+              "resultDisplay": {
+                "type": "json"
+              }
+            },
+            "description": "Successful",
+            "schema": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "/things/{thingId}/state": {
+      "get": {
+        "summary": "Get the state of a thing",
+        "operationId": "things_state",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "the thing UUID",
+            "x-meta": {
+              "flag": "id",
+              "aliases": [
+                "thing-identifier"
+              ]
+            },
+            "x-format": {
+              "guid": true
+            },
+            "name": "thingId",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "tags": [
+          "things"
+        ],
+        "responses": {
+          "200": {
+            "x-meta": {
+              "resultDisplay": {
+                "type": "json"
+              }
+            },
+            "description": "Successful",
+            "schema": {
+              "type": "string"
+            }
+          }
+        },
+        "x-meta": {
+          "hidden": true
+        }
+      },
+      "patch": {
+        "summary": "Update the state if a thing",
+        "operationId": "things_state_update",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "the thing UUID",
+            "x-meta": {
+              "flag": "id",
+              "aliases": [
+                "thing-identifier"
+              ]
+            },
+            "x-format": {
+              "guid": true
+            },
+            "name": "thingId",
+            "in": "path",
+            "required": true
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/Model 30"
+            }
+          }
+        ],
+        "tags": [
+          "things"
+        ],
+        "responses": {
+          "200": {
+            "x-meta": {
+              "resultDisplay": {
+                "type": "message",
+                "format": "Updated thing state"
+              }
+            },
+            "description": "Successful",
+            "schema": {
+              "type": "string"
+            }
+          }
+        },
+        "x-meta": {
+          "hidden": true
+        }
+      }
+    },
+    "/things/{thingId}/messages": {
+      "get": {
+        "summary": "Get the messages for a thing",
+        "operationId": "things_messages_list",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "the thing UUID",
+            "x-meta": {
+              "flag": "id",
+              "aliases": [
+                "thing-identifier"
+              ]
+            },
+            "x-format": {
+              "guid": true
+            },
+            "name": "thingId",
+            "in": "path",
+            "required": true
+          },
+          {
+            "type": "number",
+            "description": "query limit",
+            "x-meta": {
+              "flag": "l",
+              "aliases": [
+                "limit"
+              ]
+            },
+            "name": "limit",
+            "in": "query"
+          },
+          {
+            "type": "number",
+            "description": "query offset",
+            "x-meta": {
+              "flag": "o",
+              "aliases": [
+                "offset"
+              ]
+            },
+            "name": "offset",
+            "in": "query"
+          },
+          {
+            "type": "string",
+            "description": "get messages since a datetime",
+            "x-meta": {
+              "flag": "s",
+              "aliases": [
+                "since"
+              ]
+            },
+            "name": "since",
+            "in": "query"
+          },
+          {
+            "type": "boolean",
+            "description": "hydrate large message content (takes longer)",
+            "x-meta": {
+              "flag": "h",
+              "aliases": [
+                "hydrate"
+              ]
+            },
+            "name": "hydrate",
+            "in": "query"
+          }
+        ],
+        "tags": [
+          "things"
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Model 13",
+              "type": "array"
+            },
+            "description": "Successful",
+            "x-meta": {
+              "resultDisplay": {
+                "type": "table",
+                "format": null,
+                "formatArgs": null,
+                "fields": [
+                  {
+                    "id": "thingId",
+                    "name": "Thing ID"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/applications/{applicationId}/pipelines/{pipelineId}": {
+      "get": {
+        "summary": "Return the list of pipelines for the application",
+        "operationId": "pipelines_get",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "The application UUID",
+            "x-meta": {
+              "flag": "aid",
+              "aliases": [
+                "app-identifier"
+              ]
+            },
+            "x-format": {
+              "guid": true
+            },
+            "name": "applicationId",
+            "in": "path",
+            "required": true
+          },
+          {
+            "type": "string",
+            "description": "The pipeline UUID",
+            "x-meta": {
+              "flag": "pid",
+              "aliases": [
+                "pipeline-identifier"
+              ]
+            },
+            "x-format": {
+              "guid": true
+            },
+            "name": "pipelineId",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "tags": [
+          "applications"
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Model 9",
+              "type": "object"
+            },
+            "description": "Successful",
+            "x-meta": {
+              "resultDisplay": {
+                "type": "list",
+                "format": null,
+                "formatArgs": null,
+                "fields": [
+                  {
+                    "id": "id",
+                    "name": "ID"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "summary": "Edit a pipeline",
+        "operationId": "pipelines_update",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "The application UUID",
+            "x-meta": {
+              "flag": "aid",
+              "aliases": [
+                "app-identifier"
+              ]
+            },
+            "x-format": {
+              "guid": true
+            },
+            "name": "applicationId",
+            "in": "path",
+            "required": true
+          },
+          {
+            "type": "string",
+            "description": "The pipeline UUID",
+            "x-meta": {
+              "flag": "pid",
+              "aliases": [
+                "pipeline-identifier"
+              ]
+            },
+            "x-format": {
+              "guid": true
+            },
+            "name": "pipelineId",
+            "in": "path",
+            "required": true
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/Model 31"
+            }
+          }
+        ],
+        "tags": [
+          "applications"
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Model 9",
+              "type": "object"
+            },
+            "description": "Successful",
+            "x-meta": {
+              "resultDisplay": {
+                "type": "message",
+                "format": "Updated pipeline with id: %s, name: %s",
+                "formatArgs": [
+                  "id",
+                  "name"
+                ]
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete an application pipeline",
+        "operationId": "pipelines_delete",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "The application UUID",
+            "x-meta": {
+              "flag": "aid",
+              "aliases": [
+                "app-identifier"
+              ]
+            },
+            "x-format": {
+              "guid": true
+            },
+            "name": "applicationId",
+            "in": "path",
+            "required": true
+          },
+          {
+            "type": "string",
+            "description": "The pipeline UUID",
+            "x-meta": {
+              "flag": "pid",
+              "aliases": [
+                "pipeline-identifier"
+              ]
+            },
+            "x-format": {
+              "guid": true
+            },
+            "name": "pipelineId",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "tags": [
+          "applications"
+        ],
+        "responses": {
+          "204": {
+            "x-meta": {
+              "resultDisplay": {
+                "type": "message",
+                "format": "Deleted pipeline"
+              }
+            },
+            "description": "No Content"
+          }
+        }
+      }
+    },
+    "/contentTypes/{contentTypeId}/mediation/{mediationId}": {
+      "get": {
+        "summary": "Return the specified mediation",
+        "operationId": "mediations_get",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "The content type UUID",
+            "x-meta": {
+              "flag": "cid",
+              "aliases": [
+                "content-type-identifier"
+              ]
+            },
+            "x-format": {
+              "guid": true
+            },
+            "name": "contentTypeId",
+            "in": "path",
+            "required": true
+          },
+          {
+            "type": "string",
+            "description": "The mediation UUID",
+            "x-meta": {
+              "flag": "mid",
+              "aliases": [
+                "mediation-identifier"
+              ]
+            },
+            "x-format": {
+              "guid": true
+            },
+            "name": "mediationId",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "tags": [
+          "contentTypes"
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Mediation",
+              "type": "object"
+            },
+            "description": "Successful",
+            "x-meta": {
+              "resultDisplay": {
+                "type": "list",
+                "format": null,
+                "formatArgs": null,
+                "fields": [
+                  {
+                    "id": "id",
+                    "name": "ID"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "summary": "Edit/Update a mediation",
+        "operationId": "mediations_update",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "The content type UUID",
+            "x-meta": {
+              "flag": "cid",
+              "aliases": [
+                "content-type-identifier"
+              ]
+            },
+            "x-format": {
+              "guid": true
+            },
+            "name": "contentTypeId",
+            "in": "path",
+            "required": true
+          },
+          {
+            "type": "string",
+            "description": "The mediation UUID",
+            "x-meta": {
+              "flag": "mid",
+              "aliases": [
+                "mediation-identifier"
+              ]
+            },
+            "x-format": {
+              "guid": true
+            },
+            "name": "mediationId",
+            "in": "path",
+            "required": true
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/createMediation"
+            }
+          }
+        ],
+        "tags": [
+          "contentTypes"
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Mediation",
+              "type": "object"
+            },
+            "description": "Successful",
+            "x-meta": {
+              "resultDisplay": {
+                "type": "message",
+                "format": "Updated mediation with id: %s",
+                "formatArgs": [
+                  "id"
+                ]
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Deletes a mediation",
+        "operationId": "mediations_delete",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "The content type UUID",
+            "x-meta": {
+              "flag": "cid",
+              "aliases": [
+                "content-type-identifier"
+              ]
+            },
+            "x-format": {
+              "guid": true
+            },
+            "name": "contentTypeId",
+            "in": "path",
+            "required": true
+          },
+          {
+            "type": "string",
+            "description": "The mediation UUID",
+            "x-meta": {
+              "flag": "mid",
+              "aliases": [
+                "mediation-identifier"
+              ]
+            },
+            "x-format": {
+              "guid": true
+            },
+            "name": "mediationId",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "tags": [
+          "contentTypes"
+        ],
+        "responses": {
+          "204": {
+            "x-meta": {
+              "resultDisplay": {
+                "type": "message",
+                "format": "Deleted mediation"
+              }
+            },
+            "description": "No Content"
+          }
+        }
+      }
+    },
+    "/things/{thingId}/messages/{messageId}": {
+      "get": {
+        "summary": "Get the message for a thing",
+        "operationId": "things_messages_get",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "the thing UUID",
+            "x-meta": {
+              "flag": "id",
+              "aliases": [
+                "thing-identifier"
+              ]
+            },
+            "x-format": {
+              "guid": true
+            },
+            "name": "thingId",
+            "in": "path",
+            "required": true
+          },
+          {
+            "type": "string",
+            "description": "the message UUID",
+            "x-meta": {
+              "flag": "mid",
+              "aliases": [
+                "message-identifier"
+              ]
+            },
+            "x-format": {
+              "guid": true
+            },
+            "name": "messageId",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "tags": [
+          "things"
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Mediated message",
+              "type": "object"
+            },
+            "description": "Successful",
+            "x-meta": {
+              "resultDisplay": {
+                "type": "list",
+                "format": null,
+                "formatArgs": null,
+                "fields": [
+                  {
+                    "id": "thingId",
+                    "name": "Thing ID"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/things/{thingId}/contentTypes/{contentTypeId}/pipelines": {
+      "get": {
+        "summary": "Returns the list of pipelines to execute for a given thingId",
+        "operationId": "things_pipelines_list",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "The application UUID",
+            "x-meta": {
+              "flag": "tid",
+              "aliases": [
+                "thing-identifier"
+              ]
+            },
+            "x-format": {
+              "guid": true
+            },
+            "name": "thingId",
+            "in": "path",
+            "required": true
+          },
+          {
+            "type": "string",
+            "description": "The content type UUID",
+            "x-meta": {
+              "flag": "ctid",
+              "aliases": [
+                "content-type-identifier"
+              ]
+            },
+            "name": "contentTypeId",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "tags": [
+          "things"
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Model 15",
+              "type": "array"
+            },
+            "description": "Successful",
+            "x-meta": {
+              "resultDisplay": {
+                "type": "list",
+                "format": null,
+                "formatArgs": null,
+                "fields": [
+                  {
+                    "id": "id",
+                    "name": "ID"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/fakeredis": {
+      "post": {
+        "operationId": "postFakeredis",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/Model 17"
+            }
+          }
+        ],
+        "tags": [
+          "fakeredis"
+        ],
+        "responses": {
+          "default": {
+            "schema": {
+              "type": "string"
+            },
+            "description": "Successful"
+          }
+        },
+        "x-meta": {
+          "hidden": true
+        }
+      }
+    },
+    "/logs/search": {
+      "post": {
+        "summary": "Get logs from Elasticsearch",
+        "operationId": "logs_search",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/Model 19"
+            }
+          }
+        ],
+        "tags": [
+          "logs"
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Model 20",
+              "type": "array"
+            },
+            "description": "Successful",
+            "x-meta": {
+              "resultDisplay": {
+                "type": "json"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/things/pair": {
+      "post": {
+        "summary": "Creates connection with your thing and Geeny account",
+        "operationId": "things_pair",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/Model 21"
+            }
+          }
+        ],
+        "tags": [
+          "things"
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Pairing Response",
+              "type": "object"
+            },
+            "description": "Successful",
+            "x-meta": {
+              "resultDisplay": {
+                "type": "message",
+                "format": "Paired thing with id %s",
+                "formatArgs": [
+                  "thingId"
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/applications/{applicationId}/hooks": {
+      "post": {
+        "summary": "Create a webhook for an application",
+        "operationId": "hooks_create",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "The application id",
+            "x-meta": {
+              "flag": "id",
+              "aliases": [
+                "app-identifier"
+              ]
+            },
+            "x-format": {
+              "guid": true
+            },
+            "name": "applicationId",
+            "in": "path",
+            "required": true
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/Webhook"
+            }
+          }
+        ],
+        "tags": [
+          "applications"
+        ],
+        "responses": {
+          "201": {
+            "schema": {
+              "$ref": "#/definitions/Model 22",
+              "type": "object"
+            },
+            "description": "Created",
+            "x-meta": {
+              "resultDisplay": {
+                "type": "message",
+                "format": "Created hook with id: %s",
+                "formatArgs": [
+                  "id"
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/things/{thingId}/data": {
+      "post": {
+        "summary": "Post batch file location to the platform",
+        "operationId": "things_upload",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "the thing UUID",
+            "x-meta": {
+              "flag": "id",
+              "aliases": [
+                "thing-identifier"
+              ]
+            },
+            "x-format": {
+              "guid": true
+            },
+            "name": "thingId",
+            "in": "path",
+            "required": true
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/Model 25"
+            }
+          }
+        ],
+        "tags": [
+          "things"
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/repository",
+              "type": "object"
+            },
+            "description": "Successful",
+            "x-meta": {
+              "resultDisplay": {
+                "type": "message",
+                "format": "Updated data to thing"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/thingTypes/{thingTypeId}/firmwares/{firmwareId}": {
+      "patch": {
+        "summary": "Retrieves a firmware",
+        "operationId": "firmwares_update",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "The thing type UUID",
+            "x-meta": {
+              "flag": "ttid",
+              "aliases": [
+                "thing-type-identifier"
+              ]
+            },
+            "x-format": {
+              "guid": true
+            },
+            "name": "thingTypeId",
+            "in": "path",
+            "required": true
+          },
+          {
+            "type": "string",
+            "description": "The firmware UUID",
+            "x-meta": {
+              "flag": "fid",
+              "aliases": [
+                "firmware-identifier"
+              ]
+            },
+            "x-format": {
+              "guid": true
+            },
+            "name": "firmwareId",
+            "in": "path",
+            "required": true
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/Model 32"
+            }
+          }
+        ],
+        "tags": [
+          "thingTypes"
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Firmware",
+              "type": "object"
+            },
+            "description": "Successful",
+            "x-meta": {
+              "resultDisplay": {
+                "type": "message",
+                "format": "Updated firmware with id: %s",
+                "formatArgs": [
+                  "id"
+                ]
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Deletes a firmware",
+        "operationId": "firmwares_delete",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "The thing type UUID",
+            "x-meta": {
+              "flag": "ttid",
+              "aliases": [
+                "thing-type-identifier"
+              ]
+            },
+            "x-format": {
+              "guid": true
+            },
+            "name": "thingTypeId",
+            "in": "path",
+            "required": true
+          },
+          {
+            "type": "string",
+            "description": "The firmware UUID",
+            "x-meta": {
+              "flag": "fid",
+              "aliases": [
+                "firmware-identifier"
+              ]
+            },
+            "x-format": {
+              "guid": true
+            },
+            "name": "firmwareId",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "tags": [
+          "thingTypes"
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Firmware",
+              "type": "object"
+            },
+            "description": "Successful",
+            "x-meta": {
+              "resultDisplay": {
+                "type": "message",
+                "format": "Deleted firmware"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/things/{thingId}/attributes/{role}": {
+      "patch": {
+        "summary": "Update attributes for a thing",
+        "operationId": "things_update",
+        "description": "Object will override existing attributes for creator or owner based on authentication.",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "the thing UUID",
+            "x-meta": {
+              "flag": "id",
+              "aliases": [
+                "thing-identifier"
+              ]
+            },
+            "x-format": {
+              "guid": true
+            },
+            "name": "thingId",
+            "in": "path",
+            "required": true
+          },
+          {
+            "type": "string",
+            "description": "thing role [owner|creator]",
+            "x-meta": {
+              "flag": "id",
+              "aliases": [
+                "thing-identifier"
+              ]
+            },
+            "enum": [
+              "owner",
+              "creator"
+            ],
+            "name": "role",
+            "in": "path",
+            "required": true
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/repository"
+            }
+          }
+        ],
+        "tags": [
+          "things"
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/ThingsSchema",
+              "type": "object"
+            },
+            "description": "Successful",
+            "x-meta": {
+              "resultDisplay": {
+                "type": "message",
+                "format": "Updated thing with id: %s",
+                "formatArgs": [
+                  "id"
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/things/{thingId}/connectivity/activate": {
+      "patch": {
+        "summary": "Activates subscription",
+        "operationId": "things_connectivity_activate",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "the thing UUID",
+            "x-meta": {
+              "flag": "id",
+              "aliases": [
+                "thing-identifier"
+              ]
+            },
+            "x-format": {
+              "guid": true
+            },
+            "name": "thingId",
+            "in": "path",
+            "required": true
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/Connectivity subscription owner"
+            }
+          }
+        ],
+        "tags": [
+          "things"
+        ],
+        "responses": {
+          "202": {
+            "x-meta": {
+              "resultDisplay": {
+                "type": "message",
+                "format": "Subscription activated"
+              }
+            },
+            "description": "Accepted"
+          }
+        },
+        "x-meta": {
+          "hidden": true
+        }
+      }
+    },
+    "/things/{thingId}/connectivity/deactivate": {
+      "patch": {
+        "summary": "Deactivates subscription",
+        "operationId": "things_connectivity_deactivate",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "the thing UUID",
+            "x-meta": {
+              "flag": "id",
+              "aliases": [
+                "thing-identifier"
+              ]
+            },
+            "x-format": {
+              "guid": true
+            },
+            "name": "thingId",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "tags": [
+          "things"
+        ],
+        "responses": {
+          "200": {
+            "x-meta": {
+              "resultDisplay": {
+                "type": "json"
+              }
+            },
+            "description": "Successful",
+            "schema": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "/things/{thingId}/pair": {
+      "delete": {
+        "summary": "Removes connection with your thing and Geeny account",
+        "operationId": "things_unpair",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "the thing UUID",
+            "x-meta": {
+              "flag": "id",
+              "aliases": [
+                "thing-identifier"
+              ]
+            },
+            "x-format": {
+              "guid": true
+            },
+            "name": "thingId",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "tags": [
+          "things"
+        ],
+        "responses": {
+          "204": {
+            "x-meta": {
+              "resultDisplay": {
+                "type": "message",
+                "format": "Unpaired thing"
+              }
+            },
+            "description": "No Content"
+          }
+        }
+      }
+    },
+    "/applications/{applicationId}/hooks/{id}": {
+      "delete": {
+        "summary": "Delete a webhook for an application",
+        "operationId": "hooks_delete",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "The application id",
+            "x-meta": {
+              "flag": "id",
+              "aliases": [
+                "app-identifier"
+              ]
+            },
+            "x-format": {
+              "guid": true
+            },
+            "name": "applicationId",
+            "in": "path",
+            "required": true
+          },
+          {
+            "type": "string",
+            "description": "The hook id",
+            "x-meta": {
+              "flag": "id",
+              "aliases": [
+                "hook-identifier"
+              ]
+            },
+            "x-format": {
+              "guid": true
+            },
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "tags": [
+          "applications"
+        ],
+        "responses": {
+          "204": {
+            "x-meta": {
+              "resultDisplay": {
+                "type": "message",
+                "format": "Deleted hook"
+              }
+            },
+            "description": "No Content"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AddonsSchema": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "UUID",
+          "x-format": {
+            "guid": true
+          }
+        },
+        "accountId": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "endpoint": {
+          "type": "string",
+          "x-format": {
+            "uri": true
+          }
+        },
+        "webhook": {
+          "type": "string",
+          "x-format": {
+            "uri": true
+          }
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date",
+          "description": "The creation date"
+        },
+        "modifiedAt": {
+          "type": "string",
+          "format": "date",
+          "description": "The modification date"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "endpoint",
+        "webhook",
+        "createdAt",
+        "modifiedAt"
+      ]
+    },
+    "Model 1": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/AddonsSchema",
+        "type": "object"
+      }
+    },
+    "Application": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The application name",
+          "x-meta": {
+            "flag": "n",
+            "aliases": [
+              "name"
+            ]
+          }
+        },
+        "stage": {
+          "type": "string",
+          "description": "The application stage, e.g., `dev`",
+          "x-meta": {
+            "flag": "s",
+            "aliases": [
+              "stage"
+            ]
+          }
+        },
+        "id": {
+          "type": "string",
+          "description": "UUID of the application",
+          "x-format": {
+            "guid": true
+          }
+        },
+        "identityId": {
+          "type": "string",
+          "x-format": {
+            "guid": true
+          }
+        },
+        "logo": {
+          "type": "string"
+        },
+        "logoUrl": {
+          "type": "string"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date",
+          "description": "The creation date"
+        },
+        "modifiedAt": {
+          "type": "string",
+          "format": "date",
+          "description": "The modification date"
+        }
+      }
+    },
+    "Model 2": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Application",
+        "type": "object"
+      }
+    },
+    "Pipeline": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The content type name",
+          "x-meta": {
+            "flag": "n",
+            "aliases": [
+              "name"
+            ]
+          }
+        },
+        "description": {
+          "type": "string",
+          "description": "The content type description",
+          "x-meta": {
+            "flag": "d",
+            "aliases": [
+              "description"
+            ]
+          }
+        },
+        "id": {
+          "type": "string",
+          "description": "The content type UUID",
+          "x-format": {
+            "guid": true
+          }
+        },
+        "identityId": {
+          "type": "string",
+          "description": "The user identity UUID"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date",
+          "description": "The creation date"
+        },
+        "modifiedAt": {
+          "type": "string",
+          "format": "date",
+          "description": "The modification date"
+        }
+      },
+      "required": [
+        "id",
+        "identityId",
+        "createdAt",
+        "modifiedAt"
+      ]
+    },
+    "Model 3": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Pipeline",
+        "type": "object"
+      }
+    },
+    "repository": {
+      "type": "object"
+    },
+    "Project": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The project name",
+          "x-meta": {
+            "flag": "n",
+            "aliases": [
+              "name"
+            ]
+          }
+        },
+        "applicationId": {
+          "type": "string",
+          "description": "The application UUID",
+          "x-meta": {
+            "flag": "aid",
+            "aliases": [
+              "app-identifier"
+            ]
+          },
+          "x-format": {
+            "guid": true
+          }
+        },
+        "id": {
+          "type": "string",
+          "description": "The project UUID",
+          "x-format": {
+            "guid": true
+          }
+        },
+        "state": {
+          "type": "string",
+          "description": "The current state of the project"
+        },
+        "repositoryName": {
+          "type": "string",
+          "description": "The repository Name"
+        },
+        "identityId": {
+          "type": "string",
+          "description": "The user identity UUID"
+        },
+        "repository": {
+          "$ref": "#/definitions/repository",
+          "type": "object"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date",
+          "description": "The creation date"
+        },
+        "modifiedAt": {
+          "type": "string",
+          "format": "date",
+          "description": "The modification date"
+        },
+        "pipelines": {
+          "type": "string"
+        },
+        "mediations": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "repositoryName",
+        "identityId",
+        "createdAt",
+        "modifiedAt"
+      ]
+    },
+    "Model 4": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Project",
+        "type": "object"
+      }
+    },
+    "Subscription": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The Subscription UUID",
+          "x-format": {
+            "guid": true
+          }
+        },
+        "addonId": {
+          "type": "string",
+          "description": "The Addon UUID",
+          "x-format": {
+            "guid": true
+          }
+        },
+        "applicationId": {
+          "type": "string",
+          "description": "The Application UUID",
+          "x-format": {
+            "guid": true
+          }
+        },
+        "identityId": {
+          "type": "string",
+          "description": "The Account ID of the creator of the subscription"
+        },
+        "state": {
+          "type": "string",
+          "description": "The state of the subscription"
+        },
+        "config": {
+          "$ref": "#/definitions/repository",
+          "type": "object"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date",
+          "description": "The Creation Date"
+        },
+        "modifiedAt": {
+          "type": "string",
+          "format": "date",
+          "description": "The Modification Date"
+        }
+      },
+      "required": [
+        "id",
+        "addonId",
+        "applicationId",
+        "identityId",
+        "state",
+        "createdAt",
+        "modifiedAt"
+      ]
+    },
+    "Model 5": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Subscription",
+        "type": "object"
+      }
+    },
+    "contentTypes": {
+      "type": "array",
+      "description": "The content type UUIDs",
+      "x-meta": {
+        "flag": "ids",
+        "aliases": [
+          "content-type-identifiers"
+        ]
+      },
+      "items": {
+        "type": "string",
+        "x-format": {
+          "guid": true
+        }
+      }
+    },
+    "Model 6": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The thing type name",
+          "x-meta": {
+            "flag": "n",
+            "aliases": [
+              "name"
+            ]
+          }
+        },
+        "contentTypes": {
+          "$ref": "#/definitions/contentTypes",
+          "type": "array"
+        },
+        "id": {
+          "type": "string",
+          "description": "The pipeline UUID",
+          "x-format": {
+            "guid": true
+          }
+        },
+        "identityId": {
+          "type": "string",
+          "description": "The user identity UUID"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date",
+          "description": "The creation date"
+        },
+        "modifiedAt": {
+          "type": "string",
+          "format": "date",
+          "description": "The modification date"
+        }
+      },
+      "required": [
+        "id",
+        "identityId",
+        "createdAt",
+        "modifiedAt"
+      ]
+    },
+    "Model 7": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Model 6",
+        "type": "object"
+      }
+    },
+    "keyPair": {
+      "type": "object",
+      "properties": {
+        "PublicKey": {
+          "type": "string",
+          "description": "Your public key"
+        },
+        "PrivateKey": {
+          "type": "string",
+          "description": "Your private RSA key"
+        }
+      }
+    },
+    "certificate": {
+      "type": "object",
+      "properties": {
+        "keyPair": {
+          "$ref": "#/definitions/keyPair",
+          "type": "object"
+        },
+        "certificateId": {
+          "type": "string"
+        },
+        "certificateArn": {
+          "type": "string"
+        },
+        "certificatePem": {
+          "type": "string"
+        }
+      }
+    },
+    "iot": {
+      "type": "object",
+      "properties": {
+        "certificate": {
+          "$ref": "#/definitions/certificate",
+          "type": "object"
+        },
+        "iotEndpoint": {
+          "type": "string"
+        }
+      }
+    },
+    "owner": {
+      "type": "object",
+      "properties": {
+        "identityId": {
+          "type": "string"
+        }
+      }
+    },
+    "attributes": {
+      "type": "object",
+      "properties": {
+        "iot": {
+          "$ref": "#/definitions/iot",
+          "type": "object"
+        },
+        "owner": {
+          "$ref": "#/definitions/owner",
+          "type": "object"
+        },
+        "creator": {
+          "$ref": "#/definitions/owner",
+          "type": "object"
+        }
+      }
+    },
+    "ThingsSchema": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "x-format": {
+            "guid": true
+          }
+        },
+        "thingTypeId": {
+          "type": "string",
+          "description": "The thing type UUID",
+          "x-format": {
+            "guid": true
+          }
+        },
+        "pairingCode": {
+          "type": "string",
+          "description": "Code to pair your thing with Geeny"
+        },
+        "attributes": {
+          "$ref": "#/definitions/attributes",
+          "type": "object"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date",
+          "description": "The creation date"
+        },
+        "modifiedAt": {
+          "type": "string",
+          "format": "date",
+          "description": "The modification date"
+        }
+      }
+    },
+    "Model 8": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/ThingsSchema",
+        "type": "object"
+      }
+    },
+    "Model 9": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The pipeline name",
+          "x-meta": {
+            "flag": "n",
+            "aliases": [
+              "name"
+            ]
+          }
+        },
+        "definition": {
+          "$ref": "#/definitions/repository",
+          "type": "object"
+        },
+        "contentTypeId": {
+          "type": "string",
+          "description": "The content type UUID",
+          "x-meta": {
+            "flag": "cid",
+            "aliases": [
+              "content-type-identifier"
+            ]
+          },
+          "x-format": {
+            "guid": true
+          }
+        },
+        "id": {
+          "type": "string",
+          "description": "The pipeline UUID",
+          "x-format": {
+            "guid": true
+          }
+        },
+        "applicationId": {
+          "type": "string",
+          "description": "The application UUID",
+          "x-format": {
+            "guid": true
+          }
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date",
+          "description": "The creation date"
+        },
+        "modifiedAt": {
+          "type": "string",
+          "format": "date",
+          "description": "The modification date"
+        }
+      },
+      "required": [
+        "id"
+      ]
+    },
+    "Model 10": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Model 9",
+        "type": "object"
+      }
+    },
+    "createMediation": {
+      "type": "object",
+      "properties": {
+        "projectId": {
+          "type": "string",
+          "description": "The project UUID",
+          "x-meta": {
+            "flag": "pid",
+            "aliases": [
+              "project-identifier"
+            ]
+          },
+          "x-format": {
+            "guid": true
+          }
+        },
+        "mediationHandler": {
+          "type": "string",
+          "description": "The name of the mediation handler",
+          "x-meta": {
+            "flag": "n",
+            "aliases": [
+              "name"
+            ]
+          }
+        },
+        "outputContentType": {
+          "type": "string",
+          "description": "The output content type UUID",
+          "x-meta": {
+            "flag": "cid",
+            "aliases": [
+              "content-type-identifier"
+            ]
+          },
+          "x-format": {
+            "guid": true
+          }
+        }
+      }
+    },
+    "Firmware": {
+      "type": "object",
+      "properties": {
+        "checksum": {
+          "type": "string",
+          "description": "The firmware checksum",
+          "x-meta": {
+            "flag": "c",
+            "aliases": [
+              "checksum"
+            ]
+          }
+        },
+        "checksumType": {
+          "type": "string",
+          "description": "The checksum type [md5|sha1]",
+          "x-meta": {
+            "flag": "t",
+            "aliases": [
+              "checksum-type"
+            ]
+          },
+          "enum": [
+            "md5",
+            "sha1"
+          ]
+        },
+        "length": {
+          "type": "number",
+          "description": "The payload length",
+          "x-meta": {
+            "flag": "l",
+            "aliases": [
+              "length"
+            ]
+          }
+        },
+        "version": {
+          "type": "string",
+          "description": "The version number. Format (string): 0.0.0",
+          "x-meta": {
+            "flag": "v",
+            "aliases": [
+              "version"
+            ],
+            "isSecure": false,
+            "defaultValue": "0.0.0"
+          },
+          "pattern": "/^(\\d+\\.)?(\\d+\\.)?(\\*|\\d+)$/"
+        },
+        "minimumRequiredVersion": {
+          "type": "string",
+          "description": "The minimum required version",
+          "x-meta": {
+            "flag": "m",
+            "aliases": [
+              "minimum-version"
+            ],
+            "isSecure": false,
+            "defaultValue": "0.0.0"
+          },
+          "pattern": "/^(\\d+\\.)?(\\d+\\.)?(\\*|\\d+)$/"
+        },
+        "description": {
+          "type": "string",
+          "description": "The firmware description",
+          "x-meta": {
+            "flag": "d",
+            "aliases": [
+              "description"
+            ],
+            "isSecure": false,
+            "defaultValue": " "
+          }
+        },
+        "file": {
+          "$ref": "#/definitions/repository",
+          "type": "object"
+        },
+        "id": {
+          "type": "string",
+          "description": "The firmware UUID"
+        },
+        "thingTypeId": {
+          "type": "string",
+          "description": "The thing type UUID"
+        },
+        "status": {
+          "type": "string",
+          "description": "The firmware status"
+        },
+        "url": {
+          "type": "string",
+          "description": "The url to download the firmware"
+        },
+        "identityId": {
+          "type": "string",
+          "description": "The user identity"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date",
+          "description": "The creation date"
+        },
+        "modifiedAt": {
+          "type": "string",
+          "format": "date",
+          "description": "The modification date"
+        }
+      },
+      "required": [
+        "checksum",
+        "checksumType",
+        "version",
+        "minimumRequiredVersion",
+        "id",
+        "thingTypeId",
+        "status",
+        "url",
+        "identityId",
+        "createdAt",
+        "modifiedAt"
+      ]
+    },
+    "Model 11": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Firmware",
+        "type": "object"
+      }
+    },
+    "Model 12": {
+      "type": "object",
+      "properties": {
+        "thingId": {
+          "type": "string",
+          "description": "The thing type UUID",
+          "x-format": {
+            "guid": true
+          }
+        },
+        "messageId": {
+          "type": "string",
+          "x-format": {
+            "guid": true
+          }
+        },
+        "messageTypeId": {
+          "type": "string",
+          "x-format": {
+            "guid": true
+          }
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "The creation date"
+        },
+        "payload": {
+          "type": "string"
+        }
+      }
+    },
+    "Model 13": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Model 12",
+        "type": "object"
+      }
+    },
+    "Mediation": {
+      "type": "object",
+      "properties": {
+        "projectId": {
+          "type": "string",
+          "description": "The project UUID",
+          "x-meta": {
+            "flag": "pid",
+            "aliases": [
+              "project-identifier"
+            ]
+          },
+          "x-format": {
+            "guid": true
+          }
+        },
+        "mediationHandler": {
+          "type": "string",
+          "description": "The name of the mediation handler",
+          "x-meta": {
+            "flag": "n",
+            "aliases": [
+              "name"
+            ]
+          }
+        },
+        "outputContentType": {
+          "type": "string",
+          "description": "The output content type UUID",
+          "x-meta": {
+            "flag": "cid",
+            "aliases": [
+              "content-type-identifier"
+            ]
+          },
+          "x-format": {
+            "guid": true
+          }
+        },
+        "id": {
+          "type": "string",
+          "description": "The mediation UUID",
+          "x-format": {
+            "guid": true
+          }
+        },
+        "contentTypeId": {
+          "type": "string",
+          "description": "The content type UUID",
+          "x-format": {
+            "guid": true
+          }
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date",
+          "description": "The creation date"
+        },
+        "modifiedAt": {
+          "type": "string",
+          "format": "date",
+          "description": "The modification date"
+        }
+      },
+      "required": [
+        "id",
+        "contentTypeId",
+        "createdAt",
+        "modifiedAt"
+      ]
+    },
+    "Mediated message": {
+      "type": "object",
+      "properties": {
+        "thingId": {
+          "type": "string",
+          "description": "The thing type UUID",
+          "x-format": {
+            "guid": true
+          }
+        },
+        "messageId": {
+          "type": "string",
+          "x-format": {
+            "guid": true
+          }
+        },
+        "messageTypeId": {
+          "type": "string",
+          "x-format": {
+            "guid": true
+          }
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "The creation date"
+        },
+        "payload": {
+          "$ref": "#/definitions/Model 13",
+          "type": "array"
+        }
+      }
+    },
+    "Model 14": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The subscription UUID"
+        },
+        "addonId": {
+          "type": "string",
+          "description": "The addon UUID"
+        },
+        "applicationId": {
+          "type": "string",
+          "description": "The application UUID"
+        },
+        "state": {
+          "type": "string",
+          "description": "The addon UUID"
+        },
+        "config": {
+          "$ref": "#/definitions/repository",
+          "type": "object"
+        }
+      },
+      "required": [
+        "id",
+        "addonId",
+        "applicationId",
+        "state"
+      ]
+    },
+    "subscriptions": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Model 14",
+        "type": "object"
+      }
+    },
+    "application": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The application UUID"
+        },
+        "subscriptions": {
+          "$ref": "#/definitions/subscriptions",
+          "type": "array"
+        }
+      },
+      "required": [
+        "id"
+      ]
+    },
+    "ThingPipeline": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The pipeline name",
+          "x-meta": {
+            "flag": "n",
+            "aliases": [
+              "name"
+            ]
+          }
+        },
+        "definition": {
+          "$ref": "#/definitions/repository",
+          "type": "object"
+        },
+        "contentTypeId": {
+          "type": "string",
+          "description": "The content type UUID",
+          "x-meta": {
+            "flag": "cid",
+            "aliases": [
+              "content-type-identifier"
+            ]
+          },
+          "x-format": {
+            "guid": true
+          }
+        },
+        "id": {
+          "type": "string",
+          "description": "The pipeline UUID",
+          "x-format": {
+            "guid": true
+          }
+        },
+        "applicationId": {
+          "type": "string",
+          "description": "The application UUID",
+          "x-format": {
+            "guid": true
+          }
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date",
+          "description": "The creation date"
+        },
+        "modifiedAt": {
+          "type": "string",
+          "format": "date",
+          "description": "The modification date"
+        },
+        "hookUrl": {
+          "type": "string",
+          "description": "The webhook url for this pipeline",
+          "x-format": {
+            "uri": true
+          }
+        },
+        "hookSecret": {
+          "type": "string",
+          "description": "The webhook secret for this pipeline"
+        },
+        "application": {
+          "$ref": "#/definitions/application",
+          "type": "object"
+        }
+      },
+      "required": [
+        "id"
+      ]
+    },
+    "Model 15": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/ThingPipeline",
+        "type": "object"
+      }
+    },
+    "Model 16": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "the name of the addon",
+          "x-meta": {
+            "flag": "n",
+            "aliases": [
+              "name"
+            ]
+          },
+          "x-convert": {
+            "trim": true
+          }
+        },
+        "endpoint": {
+          "type": "string",
+          "description": "the addon endpoint",
+          "x-meta": {
+            "flag": "e",
+            "aliases": [
+              "endpoint"
+            ]
+          },
+          "x-format": {
+            "uri": true
+          }
+        },
+        "webhook": {
+          "type": "string",
+          "description": "the addon webhook",
+          "x-meta": {
+            "flag": "h",
+            "aliases": [
+              "webhook"
+            ]
+          },
+          "x-format": {
+            "uri": true
+          }
+        },
+        "webhookSecret": {
+          "type": "string",
+          "description": "the addon secret",
+          "x-meta": {
+            "flag": "s",
+            "aliases": [
+              "secret"
+            ]
+          }
+        }
+      },
+      "required": [
+        "name",
+        "endpoint",
+        "webhook"
+      ]
+    },
+    "CreateApplication": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The application name",
+          "x-meta": {
+            "flag": "n",
+            "aliases": [
+              "name"
+            ]
+          }
+        },
+        "stage": {
+          "type": "string",
+          "description": "The application stage, e.g., `dev`",
+          "x-meta": {
+            "flag": "s",
+            "aliases": [
+              "stage"
+            ]
+          }
+        }
+      },
+      "required": [
+        "name",
+        "stage"
+      ]
+    },
+    "CreateOrEditContentType": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The content type name",
+          "x-meta": {
+            "flag": "n",
+            "aliases": [
+              "name"
+            ]
+          }
+        },
+        "description": {
+          "type": "string",
+          "description": "The content type description",
+          "x-meta": {
+            "flag": "d",
+            "aliases": [
+              "description"
+            ]
+          }
+        }
+      }
+    },
+    "data": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "addonId": {
+          "type": "string"
+        },
+        "applicationId": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "addonId",
+        "applicationId"
+      ]
+    },
+    "Model 17": {
+      "type": "object",
+      "properties": {
+        "event": {
+          "type": "string"
+        },
+        "data": {
+          "$ref": "#/definitions/data",
+          "type": "object"
+        }
+      },
+      "required": [
+        "event"
+      ]
+    },
+    "CreateOrEditProject": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The project name",
+          "x-meta": {
+            "flag": "n",
+            "aliases": [
+              "name"
+            ]
+          }
+        },
+        "applicationId": {
+          "type": "string",
+          "description": "The application UUID",
+          "x-meta": {
+            "flag": "aid",
+            "aliases": [
+              "app-identifier"
+            ]
+          },
+          "x-format": {
+            "guid": true
+          }
+        }
+      },
+      "required": [
+        "name",
+        "applicationId"
+      ]
+    },
+    "CreateOrEditSubscription": {
+      "type": "object",
+      "properties": {
+        "addonId": {
+          "type": "string",
+          "description": "The addon UUID",
+          "x-meta": {
+            "flag": "id",
+            "aliases": [
+              "addon-identifier"
+            ]
+          },
+          "x-format": {
+            "guid": true
+          }
+        },
+        "applicationId": {
+          "type": "string",
+          "description": "The application UUID",
+          "x-meta": {
+            "flag": "aid",
+            "aliases": [
+              "app-identifier"
+            ]
+          },
+          "x-format": {
+            "guid": true
+          }
+        }
+      },
+      "required": [
+        "addonId",
+        "applicationId"
+      ]
+    },
+    "CreateOrEditThingType": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The thing type name",
+          "x-meta": {
+            "flag": "n",
+            "aliases": [
+              "name"
+            ]
+          }
+        },
+        "contentTypes": {
+          "$ref": "#/definitions/contentTypes",
+          "type": "array"
+        }
+      },
+      "required": [
+        "name"
+      ]
+    },
+    "Model 18": {
+      "type": "object",
+      "properties": {
+        "thingTypeId": {
+          "type": "string",
+          "description": "thing type UUID",
+          "x-meta": {
+            "flag": "id",
+            "aliases": [
+              "thing-type-identifier"
+            ]
+          },
+          "x-format": {
+            "guid": true
+          }
+        },
+        "attributes": {
+          "$ref": "#/definitions/repository",
+          "type": "object"
+        },
+        "storeSecrets": {
+          "type": "boolean",
+          "description": "if set to true iot certificates will be stored. Default: false",
+          "x-meta": {
+            "flag": "s",
+            "aliases": [
+              "store-secrets"
+            ]
+          },
+          "default": false
+        }
+      },
+      "required": [
+        "thingTypeId"
+      ]
+    },
+    "serviceIds": {
+      "type": "array",
+      "description": "The service identifiers",
+      "x-meta": {
+        "flag": "sids",
+        "aliases": [
+          "service-identifiers"
+        ]
+      },
+      "items": {
+        "type": "string"
+      }
+    },
+    "thingIds": {
+      "type": "array",
+      "description": "The thing UUIDs",
+      "x-meta": {
+        "flag": "tids",
+        "aliases": [
+          "thing-identifiers"
+        ]
+      },
+      "items": {
+        "type": "string",
+        "x-format": {
+          "guid": true
+        }
+      }
+    },
+    "Model 19": {
+      "type": "object",
+      "properties": {
+        "serviceIds": {
+          "$ref": "#/definitions/serviceIds",
+          "type": "array"
+        },
+        "thingIds": {
+          "$ref": "#/definitions/thingIds",
+          "type": "array"
+        },
+        "size": {
+          "type": "number",
+          "description": "The number of log entries",
+          "x-meta": {
+            "flag": "n",
+            "aliases": [
+              "number"
+            ]
+          }
+        },
+        "from": {
+          "type": "number",
+          "description": "The offset from the first log entry",
+          "x-meta": {
+            "flag": "o",
+            "aliases": [
+              "offset"
+            ]
+          }
+        }
+      }
+    },
+    "LoggingSchema": {
+      "type": "object",
+      "properties": {
+        "requestId": {
+          "type": "string",
+          "description": "TimeUUID of the action",
+          "x-format": {
+            "guid": true
+          }
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date",
+          "description": "When the log has been created"
+        },
+        "serviceId": {
+          "type": "string",
+          "description": "Name of the service the log is coming from"
+        },
+        "level": {
+          "type": "string",
+          "description": "The level of the log entry"
+        },
+        "eventName": {
+          "type": "string"
+        },
+        "data": {
+          "$ref": "#/definitions/repository",
+          "type": "object"
+        },
+        "runtime": {
+          "type": "number",
+          "description": "The operation in ms"
+        },
+        "parentId": {
+          "type": "string",
+          "description": "The requestId of the parent request",
+          "x-format": {
+            "guid": true
+          }
+        },
+        "thingId": {
+          "type": "string",
+          "x-format": {
+            "guid": true
+          }
+        },
+        "thingTypeId": {
+          "type": "string",
+          "x-format": {
+            "guid": true
+          }
+        },
+        "applicationId": {
+          "type": "string",
+          "x-format": {
+            "guid": true
+          }
+        },
+        "subscriptionId": {
+          "type": "string",
+          "x-format": {
+            "guid": true
+          }
+        },
+        "addonId": {
+          "type": "string",
+          "x-format": {
+            "guid": true
+          }
+        },
+        "identityId": {
+          "type": "string",
+          "x-format": {
+            "guid": true
+          }
+        }
+      },
+      "required": [
+        "createdAt",
+        "serviceId"
+      ]
+    },
+    "Model 20": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/LoggingSchema",
+        "type": "object"
+      }
+    },
+    "Model 21": {
+      "type": "object",
+      "properties": {
+        "pairingCode": {
+          "type": "string",
+          "description": "the pairing code",
+          "x-meta": {
+            "flag": "p",
+            "aliases": [
+              "pairing-code"
+            ]
+          },
+          "x-convert": {
+            "trim": true
+          }
+        },
+        "thingName": {
+          "type": "string",
+          "description": "the thing name",
+          "x-meta": {
+            "flag": "n",
+            "aliases": [
+              "name"
+            ]
+          },
+          "maxLength": 40,
+          "x-convert": {
+            "trim": true
+          }
+        }
+      },
+      "required": [
+        "pairingCode"
+      ]
+    },
+    "Pairing Response": {
+      "type": "object",
+      "properties": {
+        "thingId": {
+          "type": "string",
+          "description": "The thing identifier",
+          "x-format": {
+            "guid": true
+          }
+        }
+      }
+    },
+    "definition": {
+      "type": "array",
+      "description": "The pipeline definition. This is an object with numeric keys which specifies the order of handlers starting at index 1.",
+      "x-meta": {
+        "flag": "d",
+        "aliases": [
+          "definition"
+        ]
+      },
+      "items": {
+        "type": "string"
+      }
+    },
+    "CreatePipeline": {
+      "type": "object",
+      "example": {
+        "name": "My pipeline",
+        "definition": [
+          "DefaultActor",
+          "<your actor name>"
+        ],
+        "contentTypeId": "00000000-0000-0000-0000-000000000000"
+      },
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The pipeline name",
+          "x-meta": {
+            "flag": "n",
+            "aliases": [
+              "name"
+            ]
+          }
+        },
+        "contentTypeId": {
+          "type": "string",
+          "description": "The content type UUID",
+          "x-meta": {
+            "flag": "cid",
+            "aliases": [
+              "content-type-identifier"
+            ]
+          },
+          "x-format": {
+            "guid": true
+          }
+        },
+        "definition": {
+          "$ref": "#/definitions/definition",
+          "type": "array"
+        }
+      },
+      "required": [
+        "name",
+        "contentTypeId",
+        "definition"
+      ]
+    },
+    "Webhook": {
+      "type": "object",
+      "properties": {
+        "secret": {
+          "type": "string",
+          "description": "If provided, payloads will be delivered with an X-Geeny-Signature header. The value of this header is computed as the [HMAC hex digest of the body, using the secret as the key].",
+          "x-meta": {
+            "flag": "p",
+            "aliases": [
+              "payload"
+            ]
+          },
+          "maxLength": 64
+        },
+        "url": {
+          "type": "string",
+          "description": "The URL to which the payloads will be delivered.",
+          "x-meta": {
+            "flag": "u",
+            "aliases": [
+              "url"
+            ]
+          },
+          "x-format": {
+            "uri": {
+              "scheme": [
+                "http",
+                "https"
+              ]
+            }
+          }
+        }
+      },
+      "required": [
+        "url"
+      ]
+    },
+    "Model 22": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "x-format": {
+            "guid": true
+          }
+        },
+        "applicationId": {
+          "type": "string",
+          "x-format": {
+            "guid": true
+          }
+        },
+        "url": {
+          "type": "string",
+          "x-format": {
+            "uri": true
+          }
+        },
+        "secret": {
+          "type": "string"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date"
+        },
+        "modifiedAt": {
+          "type": "string",
+          "format": "date"
+        }
+      },
+      "required": [
+        "id",
+        "applicationId",
+        "url",
+        "createdAt",
+        "modifiedAt"
+      ]
+    },
+    "Model 23": {
+      "type": "object",
+      "properties": {
+        "projectId": {
+          "type": "string",
+          "description": "The project UUID",
+          "x-meta": {
+            "flag": "pid",
+            "aliases": [
+              "project-identifier"
+            ]
+          },
+          "x-format": {
+            "guid": true
+          }
+        },
+        "mediationHandler": {
+          "type": "string",
+          "description": "The name of the mediation handler",
+          "x-meta": {
+            "flag": "n",
+            "aliases": [
+              "name"
+            ]
+          }
+        },
+        "outputContentType": {
+          "type": "string",
+          "description": "The output content type UUID",
+          "x-meta": {
+            "flag": "cid",
+            "aliases": [
+              "content-type-identifier"
+            ]
+          },
+          "x-format": {
+            "guid": true
+          }
+        }
+      },
+      "required": [
+        "projectId",
+        "mediationHandler",
+        "outputContentType"
+      ]
+    },
+    "Model 24": {
+      "type": "object",
+      "properties": {
+        "checksum": {
+          "type": "string",
+          "description": "The firmware checksum",
+          "x-meta": {
+            "flag": "c",
+            "aliases": [
+              "checksum"
+            ]
+          }
+        },
+        "checksumType": {
+          "type": "string",
+          "description": "The checksum type [md5|sha1]",
+          "x-meta": {
+            "flag": "t",
+            "aliases": [
+              "checksum-type"
+            ]
+          },
+          "enum": [
+            "md5",
+            "sha1"
+          ]
+        },
+        "length": {
+          "type": "number",
+          "description": "The payload length",
+          "x-meta": {
+            "flag": "l",
+            "aliases": [
+              "length"
+            ]
+          }
+        },
+        "version": {
+          "type": "string",
+          "description": "The version number. Format (string): 0.0.0",
+          "x-meta": {
+            "flag": "v",
+            "aliases": [
+              "version"
+            ],
+            "isSecure": false,
+            "defaultValue": "0.0.0"
+          },
+          "pattern": "/^(\\d+\\.)?(\\d+\\.)?(\\*|\\d+)$/"
+        },
+        "minimumRequiredVersion": {
+          "type": "string",
+          "description": "The minimum required version",
+          "x-meta": {
+            "flag": "m",
+            "aliases": [
+              "minimum-version"
+            ],
+            "isSecure": false,
+            "defaultValue": "0.0.0"
+          },
+          "pattern": "/^(\\d+\\.)?(\\d+\\.)?(\\*|\\d+)$/"
+        },
+        "description": {
+          "type": "string",
+          "description": "The firmware description",
+          "x-meta": {
+            "flag": "d",
+            "aliases": [
+              "description"
+            ],
+            "isSecure": false,
+            "defaultValue": " "
+          }
+        },
+        "file": {
+          "$ref": "#/definitions/repository",
+          "type": "object"
+        }
+      },
+      "required": [
+        "checksum",
+        "checksumType",
+        "version",
+        "minimumRequiredVersion"
+      ]
+    },
+    "Model 25": {
+      "type": "object",
+      "properties": {
+        "allow": {
+          "type": "string",
+          "enum": [
+            "application/vnd+nanotracker.daily-activity-updates.v1+json"
+          ],
+          "x-alternatives": [
+            {
+              "type": "string",
+              "enum": [
+                "application/vnd+nanotracker.daily-activity-updates.v1+json"
+              ]
+            }
+          ]
+        },
+        "file": {
+          "type": "string",
+          "description": "the file to upload",
+          "x-meta": {
+            "flag": "f",
+            "aliases": [
+              "file"
+            ]
+          },
+          "x-convert": {
+            "trim": true
+          }
+        },
+        "bucket": {
+          "type": "string",
+          "description": "the bucket",
+          "x-meta": {
+            "flag": "b",
+            "aliases": [
+              "bucket"
+            ]
+          },
+          "x-convert": {
+            "trim": true
+          }
+        },
+        "contentTypeId": {
+          "type": "string",
+          "description": "the content type UUID",
+          "x-meta": {
+            "flag": "id",
+            "aliases": [
+              "content-type-identifier"
+            ]
+          },
+          "x-format": {
+            "guid": true
+          }
+        }
+      },
+      "required": [
+        "file",
+        "bucket"
+      ]
+    },
+    "Model 26": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "the addon name",
+          "x-meta": {
+            "flag": "n",
+            "aliases": [
+              "name"
+            ]
+          },
+          "x-convert": {
+            "trim": true
+          }
+        },
+        "endpoint": {
+          "type": "string",
+          "description": "the addon endpoint",
+          "x-meta": {
+            "flag": "e",
+            "aliases": [
+              "endpoint"
+            ]
+          },
+          "x-format": {
+            "uri": true
+          }
+        },
+        "webhook": {
+          "type": "string",
+          "description": "the addon webhook",
+          "x-meta": {
+            "flag": "h",
+            "aliases": [
+              "webhook"
+            ]
+          },
+          "x-format": {
+            "uri": true
+          }
+        }
+      }
+    },
+    "Model 27": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The application name",
+          "x-meta": {
+            "flag": "n",
+            "aliases": [
+              "name"
+            ]
+          }
+        },
+        "stage": {
+          "type": "string",
+          "description": "The application stage, e.g., `dev`",
+          "x-meta": {
+            "flag": "s",
+            "aliases": [
+              "stage"
+            ]
+          }
+        }
+      }
+    },
+    "Model 28": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The project name",
+          "x-meta": {
+            "flag": "n",
+            "aliases": [
+              "name"
+            ]
+          }
+        },
+        "applicationId": {
+          "type": "string",
+          "description": "The application UUID",
+          "x-meta": {
+            "flag": "aid",
+            "aliases": [
+              "app-identifier"
+            ]
+          },
+          "x-format": {
+            "guid": true
+          }
+        }
+      }
+    },
+    "Model 29": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The thing type name",
+          "x-meta": {
+            "flag": "n",
+            "aliases": [
+              "name"
+            ]
+          }
+        },
+        "contentTypes": {
+          "$ref": "#/definitions/contentTypes",
+          "type": "array"
+        }
+      }
+    },
+    "Model 30": {
+      "type": "object",
+      "properties": {
+        "desired": {
+          "type": "string",
+          "description": "thing state payload",
+          "x-meta": {
+            "flag": "p",
+            "aliases": [
+              "payload"
+            ]
+          }
+        }
+      },
+      "required": [
+        "desired"
+      ]
+    },
+    "Model 31": {
+      "type": "object",
+      "example": {
+        "name": "My pipeline",
+        "definition": [
+          "DefaultActor",
+          "<your actor name>"
+        ],
+        "contentTypeId": "00000000-0000-0000-0000-000000000000"
+      },
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The pipeline name",
+          "x-meta": {
+            "flag": "n",
+            "aliases": [
+              "name"
+            ]
+          }
+        },
+        "contentTypeId": {
+          "type": "string",
+          "description": "The content type UUID",
+          "x-meta": {
+            "flag": "cid",
+            "aliases": [
+              "content-type-identifier"
+            ]
+          },
+          "x-format": {
+            "guid": true
+          }
+        },
+        "definition": {
+          "$ref": "#/definitions/definition",
+          "type": "array"
+        }
+      }
+    },
+    "Model 32": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "firmware status [active|revoked]",
+          "x-meta": {
+            "flag": "s",
+            "aliases": [
+              "status"
+            ]
+          },
+          "pattern": "/active|revoked/"
+        },
+        "description": {
+          "type": "string",
+          "description": "The firmware UUID"
+        }
+      }
+    },
+    "address": {
+      "type": "object",
+      "properties": {
+        "street": {
+          "type": "string",
+          "description": "Your street",
+          "x-meta": {
+            "flag": "st",
+            "aliases": [
+              "street"
+            ]
+          }
+        },
+        "streetNumber": {
+          "type": "string",
+          "description": "Your street number",
+          "x-meta": {
+            "flag": "sn",
+            "aliases": [
+              "street-number"
+            ]
+          }
+        },
+        "postalCode": {
+          "type": "string",
+          "description": "Your street number",
+          "x-meta": {
+            "flag": "p",
+            "aliases": [
+              "post-code"
+            ]
+          }
+        },
+        "city": {
+          "type": "string",
+          "description": "Your city",
+          "x-meta": {
+            "flag": "c",
+            "aliases": [
+              "city"
+            ]
+          }
+        },
+        "extension": {
+          "type": "string",
+          "description": "Your extension",
+          "x-meta": {
+            "flag": "e",
+            "aliases": [
+              "extension"
+            ]
+          }
+        },
+        "country": {
+          "type": "string",
+          "description": "Your country",
+          "x-meta": {
+            "flag": "co",
+            "aliases": [
+              "country"
+            ]
+          }
+        }
+      },
+      "required": [
+        "street",
+        "postalCode",
+        "city",
+        "country"
+      ]
+    },
+    "Connectivity subscription owner": {
+      "type": "object",
+      "description": "person related to SIM card (owner)",
+      "properties": {
+        "firstName": {
+          "type": "string",
+          "description": "Your first name",
+          "x-meta": {
+            "flag": "n",
+            "aliases": [
+              "name"
+            ]
+          }
+        },
+        "lastName": {
+          "type": "string",
+          "description": "Your surname",
+          "x-meta": {
+            "flag": "s",
+            "aliases": [
+              "surname"
+            ]
+          }
+        },
+        "dateOfBirth": {
+          "type": "string",
+          "format": "date",
+          "description": "Your date of birth",
+          "x-meta": {
+            "flag": "dob",
+            "aliases": [
+              "date-of-birth"
+            ]
+          }
+        },
+        "address": {
+          "$ref": "#/definitions/address",
+          "type": "object"
+        }
+      },
+      "required": [
+        "firstName",
+        "lastName",
+        "dateOfBirth",
+        "address"
+      ]
+    },
+    "SubscriptionCreated": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The Subscription UUID",
+          "x-meta": {
+            "flag": "id",
+            "aliases": [
+              "subscription-identifier"
+            ]
+          },
+          "x-format": {
+            "guid": true
+          }
+        }
+      },
+      "required": [
+        "id"
+      ]
+    }
+  }
+}

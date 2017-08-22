@@ -1,0 +1,21 @@
+{
+	"log.enable": false,
+	"log.trace": false,
+	"log.info": true,
+	"log.warn": true,
+	"log.error": true,
+	"output.spinner": true,
+	"config.env": true,
+	"update.autocheck": true,
+	"swagger.validate": false,
+	"net.ca": "",
+	"net.proxy": false,
+	"net.timeout": 30000000000,
+	"output.displayJson": false,
+	"output.rawJson": true,
+	"connect.url": "https://connect.geeny.io/",
+	"connectSwagger.url": "",
+	"api.url": "https://api.geeny.io/",
+	"apiSwagger.url": "",
+	"swagger.defaultContentType": "application/json"
+}
